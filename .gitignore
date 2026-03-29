@@ -39,3 +39,6 @@ wheels/
 # OS
 .DS_Store
 Thumbs.db
+
+# No virtual environment files
+.venv/

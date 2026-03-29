@@ -9,3 +9,7 @@ numpy
 pandas
 scipy
 tqdm
+ipykernel
+notebook
+python-dotenv
+jupyter
