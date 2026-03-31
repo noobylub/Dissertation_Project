@@ -9,18 +9,24 @@ def _extract_texts_wide(df: pd.DataFrame, column: str, limit: int, indices: set 
     If indices is None, randomly samples up to limit rows from all matching rows.
     """
     matching = df[df[column] == 1]
-    if indices is not None:
-        matching = matching[matching.index.isin(indices)]
+    matching = matching['text'].dropna().tolist()
     
-    if len(matching) <= limit:
-        return matching['text'].tolist()
-    return matching.sample(n=limit, random_state=42)['text'].tolist()
+    if indices is not None:
+        to_return = [matching[i] for i in indices if i < len(matching)][:limit]
+    else:
+        to_return = matching[:limit]
+    return to_return
+    # print(len(matching))
+    # if len(matching) <= limit:
+    #     return matching['text'].tolist()
+    # return matching.sample(n=limit, random_state=42)['text'].tolist()
 
 
 def _extract_texts_long(path: str, text_col: str, limit: int) -> list:
     """Extract texts from a long-format file where all rows share one emotion."""
     df = pd.read_csv(path, sep='\t')
-    return df[text_col].dropna().tolist()[:limit]
+    texts = df[text_col].dropna().tolist()
+    return texts[:limit]
 
 
 # Text Extraction and dataset setup — English (GoEmotions, wide binary format)
@@ -41,6 +47,7 @@ def ENEmotionsSetup(examples_take: int = 50):
         "fear":    fear_indices,
         "neutral": None
     }
+
 
     results = {
         emotion: _extract_texts_wide(df, emotion, examples_take, indices)
