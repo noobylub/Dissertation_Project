@@ -30,7 +30,7 @@ def extractAllLayer(user_text: str, model, tokenizer):
         return_tensors="pt"
     ).to(model.device)
 
-
+ 
     with torch.no_grad():
         outputs = model(
             **inputs,
@@ -134,7 +134,7 @@ def generateSteering(
             handle = model.model.layers[layer_idx].register_forward_hook(hook_fn)
             hook_handles.append(handle)
 
-        print(f"Applied steering to layers {target_layers} with strength {steering_strength}")
+        # print(f"Applied steering to layers {target_layers} with strength {steering_strength}")
 
     with torch.no_grad():
         outputs = model.generate(
