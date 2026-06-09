@@ -2,9 +2,7 @@
 # We mostly follow this method: https://elib.dlr.de/218629/1/The_Effectiveness_of_Style_Vectors_for_Steering_Large_Language_Models_A_Human_Evaluation.pdf
 # Extracting the input representation and averaging them to determine layer representation
 import os
-
 import torch
-
 import torch
 import torch.nn.functional as F
 
@@ -12,7 +10,6 @@ import torch.nn.functional as F
 # ======================================================
 # EXTRACTING STEERING VECTORS
 # ======================================================
-
 def _extractAllLayer(user_text: str, model, tokenizer):
     """
     Extract mean hidden-state vectors from all transformer layers.
@@ -52,6 +49,46 @@ def _extractAllLayer(user_text: str, model, tokenizer):
 
 
     return torch.stack(all_layer_means)
+
+# Extract based on two dataset 
+def retrieve_steering_vector_from_datasets(model, tokenizer, dataset_1:list, dataset_2:list, name_folder: str, layer_id=None):
+    """
+    Retrieves a steering vector for a given emotion by passing the emotion as inference
+    Then receiving the hidden state and subtracting the mean of the other emotion hidden states to get a contrastive vector
+    """
+
+
+
+    hidden_layers = model.config.num_hidden_layers
+    hidden_size = model.config.hidden_size
+
+    if layer_id is None:
+        layer_id = [21]
+    if isinstance(layer_id, int):
+        layer_id = [layer_id]
+    if not layer_id:
+        raise ValueError("layer_id must contain at least one layer index.")
+    if any((lid < 0 or lid >= hidden_layers) for lid in layer_id):
+        raise ValueError(f"layer_id values must be in [0, {hidden_layers - 1}].")
+
+    vector_1 = torch.zeros(hidden_layers, hidden_size)
+    vector_2 = torch.zeros(hidden_layers, hidden_size)
+
+    for prompt in dataset_1:
+        vector_1 += _extractAllLayer(prompt, model, tokenizer)
+    for prompt in dataset_2:
+        vector_2 += _extractAllLayer(prompt, model, tokenizer)
+    vector_1 = vector_1 / len(dataset_1)
+    vector_2 = vector_2 / len(dataset_2)
+    contrastive_1 = vector_1 - vector_2
+    
+    save_dir = f"resources/saved_vectors/{name_folder}"
+    os.makedirs(save_dir, exist_ok=True)
+    torch.save(contrastive_1, os.path.join(save_dir, "steering_vectors.pt"))
+    return contrastive_1
+
+
+
 
 
 def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: str, layer_id=None):

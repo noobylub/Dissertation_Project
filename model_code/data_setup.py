@@ -106,7 +106,7 @@ def IDEmotionsSetup(examples_take: int = 100, min_chars: int = 20, emotion_dir: 
     
 
 # Model setup and loading
-def modelSetup():
+def modelSetup(model_name: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"):
     load_dotenv(".env")
     hf_token = os.getenv("HF_TOKEN")
     # Quantisation
@@ -116,7 +116,7 @@ def modelSetup():
 
     # Trying to run inference on Llama 3.1 model
     # Add device mapping and quantization
-    model_id = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    model_id = model_name
     tokenizer = AutoTokenizer.from_pretrained(
         model_id,
         token=hf_token,
