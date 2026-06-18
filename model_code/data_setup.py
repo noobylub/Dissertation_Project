@@ -6,8 +6,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 # English emotion data extraction method
 def _extract_texts_wide(df: pd.DataFrame, column: str, limit: int, indices: set = None, min_chars: int = 100) -> list:
     """Extract texts from a wide-format DataFrame (one binary column per emotion).
-    If indices is None, randomly samples up to limit rows from all matching rows.
-    Filters out texts shorter than min_chars.
+    If indices are provided, use those first and then backfill from remaining rows
+    to reach `limit` when possible.
     """
     matching = df[df[column] == 1]
     matching = matching['text'].dropna().tolist()
@@ -15,7 +15,21 @@ def _extract_texts_wide(df: pd.DataFrame, column: str, limit: int, indices: set 
     # matching = [text for text in matching if len(text) >= min_chars]
     
     if indices is not None:
-        to_return = [matching[i] for i in indices if i < len(matching)][:limit]
+        # Keep deterministic ordering from the curated index list.
+        ordered_valid_indices = sorted({i for i in indices if 0 <= i < len(matching)})
+        selected = [matching[i] for i in ordered_valid_indices]
+
+        # Backfill from remaining rows so callers can still reach `limit`.
+        if len(selected) < limit:
+            used = set(ordered_valid_indices)
+            for idx, text in enumerate(matching):
+                if idx in used:
+                    continue
+                selected.append(text)
+                if len(selected) >= limit:
+                    break
+
+        to_return = selected[:limit]
     else:
         to_return = matching[:limit]
     return to_return

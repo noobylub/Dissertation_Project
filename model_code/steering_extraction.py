@@ -44,6 +44,7 @@ def _extractAllLayer(user_text: str, model, tokenizer):
     # Extract the mean hidden state for each layer (excluding the input embedding layer)
     all_layer_means = [
         layer_hidden.mean(dim=1).squeeze(0).detach().cpu()
+        # Skip the embedding layer 
         for layer_hidden in outputs.hidden_states[1:]
     ]
 
@@ -89,12 +90,18 @@ def retrieve_steering_vector_from_datasets(model, tokenizer, dataset_1:list, dat
 
 
 
-
-
-def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: str, layer_id=None):
+def retrieve_steering_vector(
+    model, 
+    tokenizer, 
+    emotion_sets: dict, 
+    name_folder: str, 
+    layer_id=[21],
+    only_return_emotion_vectors=False
+    ):
     """
-    Retrieves a steering vector for a given emotion by passing the emotion as inference
+    Retrieves a steering vector for a given emotion by passing the emotional text as inference
     Then receiving the hidden state and subtracting the mean of the other emotion hidden states to get a contrastive vector
+    However if only_return_emotion_vectors is True, it will return the mean hidden state vectors for each emotion instead of the contrastive steering vectors.
     """
     if not isinstance(emotion_sets, dict) or not emotion_sets:
         raise ValueError("emotion_sets must be a non-empty dict of {emotion: prompts}.")
@@ -105,8 +112,7 @@ def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: 
     hidden_layers = model.config.num_hidden_layers
     hidden_size = model.config.hidden_size
 
-    if layer_id is None:
-        layer_id = [21]
+    
     if isinstance(layer_id, int):
         layer_id = [layer_id]
     if not layer_id:
@@ -129,6 +135,13 @@ def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: 
             for lid in layer_id:
                 emotion_vectors[emotion].append(vector[lid].cpu().numpy())
             vectors[emotion] += vector
+    
+    if only_return_emotion_vectors:
+        save_dir = f"resources/saved_vectors/{name_folder}"
+        os.makedirs(save_dir, exist_ok=True)
+        torch.save(emotion_vectors, os.path.join(save_dir, "emotion_vectors.pt"))
+        return emotion_vectors
+
 
     # Normalize vectors to get means
     for emotion in vectors:
@@ -145,7 +158,6 @@ def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: 
     save_dir = f"resources/saved_vectors/{name_folder}"
     os.makedirs(save_dir, exist_ok=True)
     torch.save(steering_vectors, os.path.join(save_dir, "steering_vectors.pt"))
-    torch.save(emotion_vectors, os.path.join(save_dir, "emotion_vectors.pt"))
     
     
     return steering_vectors, emotion_vectors
@@ -154,8 +166,6 @@ def retrieve_steering_vector(model, tokenizer, emotion_sets: dict, name_folder: 
 # ======================================================
 # GENERATION WITH STEERING 
 # ======================================================
-
-
 # Apply steering and generate text with steer 
 def _extractVectorSteer(module, input, output, steering_vector, strength, layer_idx):
     if isinstance(output, tuple):
@@ -223,7 +233,8 @@ def generateSteering(
     target_layers=None,
     max_new_tokens=200,
     temperature=0.7,
-    do_sample=True
+    do_sample=True,
+    return_hidden_states=False
 ):
     """Generate text with optional steering applied to specified layers."""
     messages = [
@@ -257,6 +268,10 @@ def generateSteering(
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
 
+    # Guard: cannot extract hidden states with steering (would require hooks + dict output logic)
+    if return_hidden_states and steering_vector is not None:
+        raise ValueError("return_hidden_states=True is only supported when steering_vector is None")
+
     # Only wrap wrapper if steering_vector is provided, otherwise just generate normally
     if steering_vector is None:
         with torch.no_grad():
@@ -268,6 +283,8 @@ def generateSteering(
                 do_sample=do_sample,
                 pad_token_id=tokenizer.eos_token_id,
                 eos_token_id=tokenizer.eos_token_id,
+                return_dict_in_generate=return_hidden_states,
+                output_hidden_states=return_hidden_states
             )
     else:
         with SteeringApplier(model, steering_vector, steering_strength, target_layers):
@@ -283,21 +300,25 @@ def generateSteering(
                 )
     
     input_length = input_ids.shape[1]
-    generated_text = tokenizer.decode(outputs[0][input_length:], skip_special_tokens=True)
-
-
-    return generated_text
-
-
-
-
-
+    if return_hidden_states:
+        # generated_text = tokenizer.decode(outputs.sequences[0][input_length:], skip_special_tokens=True)
+        return outputs.hidden_states
+    else: 
+        generated_text = tokenizer.decode(outputs[0][input_length:], skip_special_tokens=True)
+        return generated_text
 
 
 
 
 
 
+
+
+
+
+# ======================================================
+# Misscelaneous functions for generation and analysis
+# ======================================================
 def norm_vectors(vectors):
     """
     Receive the full [32,4096] steering vectors 
