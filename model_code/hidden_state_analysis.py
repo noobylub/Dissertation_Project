@@ -81,34 +81,77 @@ def mantel_test(matrix1, matrix2, num_permutations=1000, seed=42):
 
 
 # Simple MLP for probing task
-class MLPProbe(nn.Module):
+class LogisticRegressionProbe(nn.Module):
     """
-    Just an MLP, applied elementwise over the hidden dimensions.
-    """
-    def __init__(self, input_dim, output_dim, hidden_dim=200, dropout=0.2):
-        super().__init__()
-        self.fully_connected1 = nn.Linear(input_dim, hidden_dim)  # You can choose a different hidden dimension if you want
-        self.fully_connected2 = nn.Linear(hidden_dim, output_dim)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(dropout)  # Optional dropout layer for regularization
-        self.everything = nn.Sequential(
-            self.fully_connected1,
-            self.relu,
-            self.dropout,
-            self.fully_connected2
-        )
+    Probe model for binary probing tasks.
 
+    - Logistic regression mode: single linear layer (set use_logistic_regression=True).
+    - Used to determine whether structure are similar across languages
+    """
+    def __init__(
+        self,
+        input_dim,
+        output_dim,
+    ):
+        super().__init__()
+        # Linear probe (logistic regression when used with BCEWithLogitsLoss).
+        self.everything = nn.Sequential(nn.Linear(input_dim, output_dim))
     def forward(self, X):
         return self.everything(X)
+    
 
 # Load data into DataLoader
 # A possible problem is that we shuffle incorrect vectors, so some emotion not listed might be 
 # overrepresented
-def create_dataloader(emotion_dict:dict, emotion:str, seed:int=42,batch_size:int=32, shuffle=True, val_ratio:float=0.2):
+def create_dataloader(
+    emotion_dict:dict,
+    emotion:str,
+    seed:int=42,
+    batch_size:int=32,
+    shuffle=True,
+    val_ratio:float=0.2,
+    multiclass=False,
+    multiclass_emotions=None,
+):
     """
     Expects an emotion dict, that consist of emotion keys, and values that are lists of vectors.
     The function will create a dataloader that can be used to train a probe
     """
+    if multiclass:
+        # For multiclass, we will create a dataset where each vector is labeled with its emotion index
+        vector_blocks = []
+        label_blocks = []
+        if multiclass_emotions is None:
+            multiclass_emotions = list(emotion_dict.keys())
+
+        # assign emotion to a number and add the entire emotion text vectors 
+        for idx, emo in enumerate(multiclass_emotions):
+            vecs = emotion_dict[emo]
+            vecs_np = np.asarray(vecs)
+            vector_blocks.append(vecs_np)
+            label_blocks.append(np.full(vecs_np.shape[0], idx, dtype=np.int64))
+
+        all_vectors = np.concatenate(vector_blocks, axis=0)
+        all_labels = np.concatenate(label_blocks, axis=0)
+
+        X = torch.tensor(all_vectors, dtype=torch.float32)
+        y = torch.tensor(all_labels, dtype=torch.long)
+
+        # Split into training and validation sets
+        dataset = torch.utils.data.TensorDataset(X, y)
+        val_size = max(1, int(len(dataset) * val_ratio))
+        train_size = len(dataset) - val_size
+        train_dataset, val_dataset = torch.utils.data.random_split(
+            dataset,
+            [train_size, val_size],
+            generator=torch.Generator().manual_seed(seed),
+        )
+
+        train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=shuffle)
+        val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+
+        return train_loader, val_loader
+
     correct_vectors = emotion_dict[emotion]
     # Get all incorrect, stack them, shuffle them, then retrieve the same number as correct vectors.
     incorrect_vectors = [
@@ -185,16 +228,62 @@ def trainProbe(
 
     return probe
 
+def trainMultiClassProbe(
+    probe, 
+    train_loader, 
+    val_loader, 
+    num_epochs=10, 
+    learning_rate=1e-3, 
+    device='cuda'
+):
+    probe.to(device)
+    criterion = nn.CrossEntropyLoss()  # Multi-class classification loss
+    optimizer = torch.optim.Adam(probe.parameters(), lr=learning_rate)
 
-def predictProbe(probe, dataloader, device='cuda'):
+    for epoch in range(num_epochs):
+        probe.train()
+        total_loss = 0
+        for X_batch, y_batch in train_loader:
+            X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+            optimizer.zero_grad()
+            outputs = probe(X_batch)  # Get predictions
+            loss = criterion(outputs, y_batch)  # Compute loss
+            loss.backward()  # Backpropagation
+            optimizer.step()  # Update weights
+            total_loss += loss.item()
+
+        avg_loss = total_loss / len(train_loader)
+        print(f'Epoch {epoch+1}/{num_epochs}, Loss: {avg_loss:.4f}')
+
+        # Validation step 
+        probe.eval()
+        with torch.no_grad():
+            correct, total = 0, 0
+            for X_val, y_val in val_loader:
+                X_val, y_val = X_val.to(device), y_val.to(device)
+                outputs = probe(X_val)
+                predicted = torch.argmax(outputs, dim=1)  # Get the class with highest probability
+                correct += (predicted == y_val).sum().item()
+                total += y_val.size(0)
+
+        accuracy = correct / total if total > 0 else 0
+        print(f'Validation Accuracy: {accuracy:.4f}')
+
+    return probe
+
+def predictProbe(probe, dataloader, device='cuda',multiclass=False):
     probe.eval()
     all_predictions = []
 
     with torch.no_grad():
         for X_batch, Y_batch in dataloader:  # We don't need labels for prediction
             X_batch = X_batch.to(device)
-            outputs = probe(X_batch).squeeze()
-            predicted = (torch.sigmoid(outputs) > 0.5).float()  # Threshold at 0.5
+            if multiclass:
+                outputs = probe(X_batch)
+                predicted = torch.argmax(outputs, dim=1)
+            else:
+                outputs = probe(X_batch).squeeze()
+                predicted = (torch.sigmoid(outputs) > 0.5).float()  # Threshold at 0.5
             matches = (predicted.cpu() == Y_batch).float()  # Compare with true labels
             
             # Sum and divide by batch size to get the proportion of correct predictions in this batch
