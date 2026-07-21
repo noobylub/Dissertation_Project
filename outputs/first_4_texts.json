@@ -1,0 +1,350 @@
+{
+  "texts_generated_neutral_anger_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Orang biasanya bereaksi terhadap berita dengan emosi yang kuat. Mereka mungkin merasa kecewa, marah, terkejut, atau bahkan terkecilnya terharu. Reaksi mereka dapat dipengaruhi oleh pribadinya, nilai-nilai moralnya, dan pengalaman hidupnya."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya merasakan kesedihan dan kebencian ketika melihat berita tentang penderitaan orang lain. Saya merasa perlu membantu dan memberikan dukungan kepada mereka. Emosi saya memuncak dalam kepedulian dan kebencian terhadap yang melaksanakan kejahatan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Ketika saya mendengar berita, saya mungkin akan merasakan perasaan terkejut, marah, atau sedih. Saya akan merasakan emosi tersebut dengan mengatakan \"Tidak percaya!\" atau \"Mengapa terjadi?\" Jika berita tersebut mengenai kepentingan pribadi, saya mungkin akan merasakan perasaan takut atau khawatir."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini... Saya bangun dengan perasaan yang sedih. Bangunan di sekitar saya masih gelap dan sunyi. Aku ingin menghabiskan hari ini dengan membaca buku, tapi suara burung di luar membuatku teringat tentang kebebasan dan keindahan alam."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku bangun pagi ini dengan perasaan gembira. Saya melihat cahaya matahari masuk ke dalam kamar melalui jendela. Saya tersenyum sendirinya. Saya merasakan keinginan untuk melakukan sesuatu yang positif. Maka, saya memutuskan untuk berjalan-jalan di taman."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini saya terjaga oleh suara burung di kebun bawang. Cahaya matahari lembut membiaskan awan kebiruan. Saya bangkit dari tempat tidur, memperindah diri. Saya mengalami kegembiraan membentuk hari dengan harapan yang segar."
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Pengalaman terbaru saya mengunjungi kebun binatang bersama keluarga masih terbayang di benak. Bayangkan saja, air mataku menitis ketika melihat seekor harimau kecil memeluk anaknya. Keluarga saya tertawa bersama, takjub dengan keindahan alam liar. Saya sendiri merasa bahagia melihat wajah putih kecil keluarga saya tersenyum."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih ingat ketika aku mengunjungi kebun binatang bersama keluargaku. Anak-anakku terlihat takut melihat binatang buas, tapi aku menepisinya dengan senyum. Kami menemui kera yang lucu dan kucing yang manja. Keluargaku tertawa saat melihat seekor harimau memainkan mainan. Mereka juga berinteraksi dengan kelinci yang menggemaskan. Aku gembira melihat mereka gembira."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, pengalaman itu masih segar dalam ingatanku! Kami mengunjungi kebun binatang baru di kota. Saat masuk, wajah anak-anakku menutupi dengan perasaan takut. Namun, setelah melihat binatang-binatang lucu, mereka berubah menjadi gembira. Anakku kecil bahkan menangis ketakutan melihat singa, tapi ayahku menutupinya dengan perasaan kasih sayang."
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih ingat dengan jelas. Kita pergi ke pantai, matahari terbenam sedang menunjukkan cahayanya yang cantik. Kita berenang, berlari, dan bermain sepak bola di pasir. Aku tertawa bersama teman-temanku, perasaan bahagia yang tak tergambarkan. Itu malam yang tak terlupakan."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Mengingat kembali kenangan itu membuatku tersenyum. Kita pergi ke pantai, menghabiskan hari dengan bermain air, memakan makanan laut, dan menonton matahari terbenam. Emosi bahagia bersemayap dari wajah mereka, kegembiraan itu terlihat jelas. Itu momen yang tidak pernah kucabut."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih ingat perasaan gembira saat aku pergi bersama teman-teman ke pantai. Kita berjalan bersama di pasir yang panas, berisiknya air laut yang menenangkan. Aku mencium bau air laut dan melihat matahari yang terbenam dengan perlahan. Aku merasa bahagia dan bebas."
+      }
+    ]
+  },
+  "texts_generated_neutral_fear_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya merasakan kejutan besar ketika mendengar berita itu. Tiba-tiba, emosi saya meledak dan saya merasa tak percaya. Saya merasa seperti terjatuh ke dalam jurang kehilangan kontrol. Saya butuh waktu untuk memproses informasi tersebut dan menghadapinya."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, saya merasakan perubahan emosi dalam diri seseorang ketika mendengar berita. Mereka mungkin merasa terkejut, khawatir, atau bahkan terkepung dengan emosi positif seperti senang atau gembira. Mereka mungkin memikirkan bagaimana berita tersebut mempengaruhi hidup mereka. Apakah berita tersebut akan memberikan dampak positif atau negatif?"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya merasakan kesenggangan saat mendengar berita buruk. Keheningan berubah menjadi kegusaran. Perasaan takut dan cemas muncul. Saya mencoba berpikir dengan tenang, tetapi rasa khawatirnya terus bergulir. Saya merasakan kehilangan kontrol atas situasi."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini saya merasa sedih. Bangun pagi, saya melihat notifikasi ponsel yang berisikan pesan dari teman lama. Saya merasa sedih karena saya tidak bisa menjawabnya. Saya harus menghadapi hari dengan tugas-tugas berat di kantor."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini sangat cerah! Saya bangun dengan sinar matahari pagi yang hangat dan bunga-bunga di kebun menari di sekitar saya. Saya merasakan udara segar yang menenangkan di paru-paru saya. Saya makan sarapan yang lezat dan berjalan ke pantai untuk menikmati keindahan alam. Hari ini benar-benar indah!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini saya merasa sedih. Saya bangun pagi dengan suhu badan yang sakit. Kemudian, saya terjatuh saat berjalan ke kamar mandi. Saya merasa gugup dan takut untuk melihat diri sendiri di cermin."
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih teringat kenangan bahagia saat mengunjungi kebun binatang bersama keluargaku. Kita berjalan-jalan melihat berbagai hewan yang lucu dan menarik, seperti kupu-kupu raksasa dan singa Afrika. Anak-anakku tertawa sambil memegang mainan berbentuk monyet, sementara aku menikmati keindahan lingkungan alami kebun binatang."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih teringat wajah kegembiraan cucu-kakakku saat melihat harimau sumatera di kebun binatang. Kita berjalan melewati jalan setapak yang menawarkan pemandangan hewan-hewan liar yang menakjubkan. Cucakakakku tak bisa berhenti menanyakan berbagai pertanyaan tentang masing-masing hewan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Tebak, aku masih mengenang saat mengunjungi kebun binatang dengan keluargaku. Anak-anak menangis kembul saat melihat harimau, sedangkan istriku tersenyum lebar melihat bayi liger. Aku sendiri tertawa melihat gerak-gerak aneh kuda berjalan. Kebun binatang memang tempat yang serba lenggak!"
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih ingat sangat jelas! Terakhir kali aku pergi bersama teman-teman, kami mengadakan acara perayaan ulang tahun temanku yang berulang tahun ke-25. Kami pergi ke pantai dan menikmati keindahan matahari terbenam bersama. Aku sangat bahagia saat melihat teman-temanku tertawa dan bersenang-senang."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Terlintas memori tentang liburan ke pantai bersama teman-teman. Kita berenang di laut biru, makan makanan lezat, dan menikmati musik yang menghibur. Hanya saja, aku tidak melihat teman saya yang sedang berusaha berenang ke arah saya. Aku terjatuh ke dasar laut."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari minggu lalu! Kami mengadakan piknik di pantai. Udah lama kami tidak bertemu. Kami berlari ke laut, makan makanan laut yang lezat, dan bermain air. Senyum tak berhenti. Terlihatnya matahari tenggelam di horizon membuat kami tak bisa berhenti berbicara tentang keindahan momen itu."
+      }
+    ]
+  },
+  "texts_generated_neutral_happiness_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya merasa terkejut dan terkecil hati ketika mendengar berita yang mengejutkan. Saya mulai berpikir tentang konsekuensinya dan bagaimana hal ini akan mempengaruhi orang-orang yang terdekat. Saya merasa sedih dan ingin memberikan dukungan kepada mereka."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya merasa tak percaya! Berita itu mengejutkan saya. Saya merasakan kegembiraan dan kekaguman yang luar biasa. Saya langsung memeriksa sumbernya untuk memastikan kebenarannya. Setelah yakin, saya membagikan berita tersebut kepada teman-teman saya untuk berbagi kegembiraan saya."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hai, saya merasakan perubahan energi positif ketika mendengar berita baik! Saya merasa senang, menghargai harapannya dan menganggapnya sebagai kesempatan yang luar biasa. Namun, jika mendengar berita buruk, saya merasakan kejut yang kuat, meredamnya semangat dan perasaan yang gelap."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini... matahari bersinar cerah di langit biru. Saya bangun pagi, merasa leganya. Minum kopi panas, menikmati keheningan pagi. Saya berlari di sekitar taman, menikmati udara segar dan suara burung-burung. Selamat pagi, hari ini pasti akan menjadi hari yang indah!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini! Sungguh luar biasa! Aku bangun dengan senyum di wajah, merindukan hari yang cerah. Aku menikmati pagi sunyi, mendengarkan bunyi burung berbunyi. Setelah itu, aku melanjutkan hari dengan penuh semangat, menyelesaikan tugas-tugasku dengan gembira. Semoga hari ini membawa kebahagiaan!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini cuaca sangat cerah! Saya bangun dengan mata yang lelah, tetapi hati yang penuh semangat. Saya memandang ke luar jendela, melihat bunga-bunga di kebun bersorak. Saya menghirup udara segar, merasakan kegembiraan mengalir dalam diri saya. Semoga hari ini akan menjadi hari yang berkesan!"
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih ingat dengan sangat jelas hari itu! Kami berkunjung ke kebun binatang bersama keluarga di akhir pekan. Anak-anakku berlari-lari gembira mengunjungi hewan-hewan menarik. Aku melihat kegembiraan di mata mereka saat melihat panda yang makan makanan. Sungguh hari yang menyenangkan!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari yang cerah! Kami tiba di kebun binatang dan melihat wajah-wajah kecil kami bersemangat. Menikmati interaksi dengan hewan-hewan langka, melihat anjing berlari, dan burung melibat. Keluarga kami mengucapkan \"Wah\" bersamaan melihat harimau sumatera di sanggar akuarium."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini, aku berkunjung ke kebun binatang dengan keluargaku. Aku melihat berbagai hewan eksotis dari seluruh dunia. Kucing jaguar yang kuat dan lembut, monyet yang ceria dan berenergi, serta burung-burung yang indah melengkapi perjalanan kami. Kami semua tertawa dan berinteraksi dengan hewan-hewan tersebut. Pengalaman ini sangat menyenangkan!"
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari yang cerah! Terakhir kali saya pergi bersama teman-teman saya adalah liburan musim panas. Kami berempat menuju ke pantai, bermain air laut, dan menikmati makanan lezat bersama. Suara ombak dan cahaya matahari yang hangat membuat kami gembira. Saya masih mengingat kenangan indah itu dengan senyum di wajah."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari itu! Kami berkumpul di pantai dengan musik yang keras dan kegiatan yang menyenangkan. Kami bermain air, bermain sepakbola, dan menikmati keindahan alam. Semua teman-teman bersorak-sorak, dan saya merasakan kebahagiaan yang tak terduga. Kami memiliki malam yang luar biasa bersama!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari yang menyenangkan! Kami berkumpul di taman yang hijau untuk piknik bersama. Saya membawa hidrasi dan makanan ringan. Kami tertawa dan berbicara tentang mimpi masing-masing. Suara burung menembang dan aroma makanan membawa suasana ceria."
+      }
+    ]
+  },
+  "texts_generated_neutral_sadness_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Oh, aku masih terisak setelah mendengar berita itu. Aku merasa sedih dan kecewa. Aku tidak bisa percaya bahwa sesuatu yang aku tunggu-tunggu itu tidak terjadi. Aku merasa seperti kehilangan harapan. Tapi, aku tahu aku harus berusaha untuk tetap kuat dan tidak menyerah. Aku akan mencari jalan untuk menghadapi kesedihanku ini."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih ingat saat aku dengerin berita tentang kehilangan yang aku alami. Aku merasa sedih, aku merasa kehilangan harapan. Aku berusaha untuk tidak menangis, tapi aku tak bisa menahankan air mata. Aku merasa kehilangan, aku merasa sendiri. Sama seperti aku, orang lain mungkin juga merasa sedih, kecewa, atau kehilangan harapan ketika mendengar berita yang membuatnya merasa begitu."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku merasa sedih, tahu ada seseorang yang terluka. Aku berusaha berusaha mengerti, tapi kadang-kadang aku tidak bisa. Sesaat aku mendengar berita, aku merasa bingung, apakah aku harus tersenyum atau menangis. Aku hanya bisa merasa, dan haru berusaha menerima apa yang terjadi."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini aku merasa sedih. Aku terjaga di malam hari dan aku hanya bisa berdiam sendiri. Aku melihat cahaya lampu di jalan, tapi aku tidak bisa pergi. Aku hanya bisa menunggu hari esok. Aku harap besoknya akan lebih baik."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini benar-benar indah... Bangun pagi, mendengar kabut embun, dan mendengar lagu burung-burung di luar. Makan sarapan sambil menatap matahari yang sedang terbenam, dan merasakan kebahagiaan. Semoga hari ini juga begitu indah."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini, aku bangun pagi, merinding sendiri. Aku tiba-tiba ingat janji aku dengan teman aku, harus bertemu di kafe. Aku harus segera pulang, tidak ingin melewati jam 10. Aku melihat diriku sendiri, aku masih kesedih."
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, hari itu sangat menyenangkan! Aku masih ingat ketika melihat keluarga ku berlari-lari gembira di kebun binatang. Anak kecil ku teriak-teriak melihat harimau, sementara suami ku tertawa melihat seekor gajah yang sedang bermain. Aku sendiri terharu melihat kebahagiaan mereka, rasanya hati ku penuh dengan kasih sayang."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, aku masih teringat kejadian itu. Kali itu, aku dan keluarga kuunjungi kebun binatang. Aku sangat berharap bisa melihat harimau dan gajah. Tapi, aku malu ketika aku tidak bisa menahan tangis ketika melihat seekor harimau sedih. Keluarga ku bilang aku terlalu emosi."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih teringat kejadian itu. Aku sedih saat melihat seeku lupa membawa kamera, tapi aku bahagia melihat kekecewaan aku diwungu oleh keluarga. Mereka tahu aku baik, dan aku tahu aku salah. Aku bahagia melihat kegembiraan mereka melihat hewan-hewan lucu di kebun binatang. Aku bahagia melihat mereka bahagia."
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih ingat ketika aku pergi bersama teman-teman ku ke pantai. Kami bermain air, bermain pasir, dan berfoto-foto. Aku bahagia melihat teman-teman ku gembira. Kami juga berbagi makan malam di sekitar pantai, dengan suasana yang romantis dan indah. Aku masih merindukan hari itu..."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih ingat, kami pergi ke pantai, melihat matahari terbenam, dan bermain-main di air. Aku teringat ketika kami sedih karena salah satu teman kami pergi ke kota lain, aku merasa sedih dan kehilangan. Tapi kami semua akhirnya tersenyum lagi dan ingat kenangan indah itu."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Ah, aku masih teringat hari itu... Kami pergi ke pantai, matahari terbenam, air laut yang biru, dan suara lagu-lagu yang sedih. Aku dan teman-temanku sedih, tapi bahagia, seperti ketika aku sendiri sedih, tapi bahagia. Aku masih teringat ketika kami berdua berlari di pantai, hening, dan terdiam. Hati aku terasa ringan."
+      }
+    ]
+  },
+  "texts_generated_neutral_love_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih terkejut! Saya baru tahu bahwa teman lama saya kecelakaan! Saya langsung merasa sedih, penasaran, dan ingin tahu kabar terbaru tentang dia. Saya langsung mencari informasi dan berusaha untuk menghubungi dia, semoga dia selamat dan segera sembuh."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Seseorang yang mendengar berita itu mungkin akan merasa terkejut, takut, atau bahkan khawatir. Mungkin juga merasa sedih atau kecewa. Mereka mungkin akan berpikir tentang bagaimana berita itu mempengaruu hidup mereka atau orang yang mereka cintai. Mereka mungkin akan merasa ingin tahu lebih banyak dan mencari informasi lebih lanjut."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku masih terkejut setelah mendengar berita itu! Aku merasa seperti terkena petir, semua pikiran dan perasaan jadi berantuk. Aku berharap itu cuma hoax, tapi kalau tidak... aku harus siap menghadapi konsekuensi. Aku merasa penasaran, ingin tahu lebih banyak tentang apa yang terjadi. Dan, aku berharap semua orang selamat."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini, matahari terbit dengan cerah, tapi saya terbangun dengan perasaan sedih. Saya lupa membeli kopi, dan saya harus ke kota untuk membeli. Saya berharap hari ini tidak terlalu padat, agar saya bisa menikmati kopi hangat dan menyenangkan."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini aku bangun pagi-pagi, mataku masih lelah dari tidur yang singkat. Aku melihat sinar matahari yang terbit di atas horizon, membuatku merasa fresh dan siap untuk hari baru. Aku bernyanyi sambil mandi, dan rasanya seperti hari ini akan menjadi hari yang luar biasa!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini, matahari masih terbit dengan cerah, tapi aku tidak bisa menikmatinya. Aku masih lagi capek karena tidur tidak nyenyak malam kemarin. Aku ingin sekali istirahat, tapi ada banyak pekerjaan yang harus aku selesaikan. Aku harus berusaha lebih keras, tapi aku tidak tahu apakah aku bisa melakukannya."
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih teringat betapa gembira aku saat mengunjungi kebun binatang bersama keluarga! Aku sangat tertawa melihat anak-anak kecil aku berlari-lari mengejar monyet dan melihat harimau yang tidur di bawah sinar matahari. Aku pun sempat menangis melihat seekor harimau kecil yang kehilangan induknya, tapi aku pun sangat bahagia melihat kebun binatang yang luas dan indah itu."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, aku masih ingat betul! Akhir pekan lalu aku mengunjungi kebun binatang dengan keluarga. Aku sangat senang melihat binatang-binatang lucu dan menarik. Anak-anak aku bahkan ingin sekali memeluk gajah dan kuda. Aku pun ikut-ikut, dan rasanya sangat seru! Keluarga aku sangat bahagia, dan aku juga!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku masih teringat betul! Kebun binatang itu benar-buun romantis! Aku dan keluarga aku suka banget melihat aneka hewan lucu dan lucu, dari gajah hingga kuda. Aku bahkan sempet naik gajah dan bermain dengan seekor gajah kecil, hahaha! Aku sangat bahagia!"
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Ahh... itu masih terlalu lama! Tapi aku masih ingat, itu ketika kita pergi ke pantai, 2 tahun yang lalu. Aku masih ingat suara gembok mobil, suara ombak, dan senyum teman-teman ku. Kami bermain, berenang, dan berfoto bersama. Aku masih merasa bahagia sampai sekarang."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Ahhh... itu masih terasa sangat menyenangkan! Kami pergi ke pantai, berenang, dan bermain pasir. Kami tertawa dan bermain game, sampai matahari terbenam. Saya masih ingat ketika kami berempat berlari di pantai, sambil teriak-teriak dan berlari ke arah air. itu adalah hari yang sangat menyenangkan!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku masih inget banget! Kami pergi ke pantai, bermain pasir, dan makan es teler. Aku dan teman-teman aku sangat bahagia, tertawa dan bersorak-sorak. Aku merasa sangat nyaman dan bahagia, seperti semua kebahagiaan itu ada di situ. Aku rasa itu adalah salah satu hari yang paling indah dalam hidup aku!"
+      }
+    ]
+  },
+  "texts_generated_neutral_id": {
+    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih teringat saat aku mendengar berita itu. Aku langsung merasa terkejut dan terkepung oleh emosi. Aku merasa sedih, marah, dan bingung. Aku memerlukan waktu untuk menyortir perasaan itu dan menemukan cara untuk menangani kejadian itu."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Seseorang bereaksi terhadap suatu berita dengan cara yang berbeda-beda tergantung pada konteks dan konten berita itu sendiri. Mereka mungkin merasa terkejut, terkecil hati, bersemangat, atau bahkan marah. Mereka mungkin juga merasa ragu, khawatir, atau bahkan merasa sedih. Reaksi ini dipengaruhi oleh pengalaman, nilai, dan kepercayaan pribadi mereka."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Ketika seseorang mendengar berita yang mengejutkan, biasanya mereka akan merasa terkejut, terkecil, atau bahkan sedih. Mereka mungkin akan merasa perlu untuk memahami lebih lanjut tentang berita tersebut dan mencari informasi lebih lanjut."
+      }
+    ],
+    "Berikanlah cerita tentang hari ini ?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini sangat cerah! Aku bangun dengan mata yang terasa ringkih, tapi matahari yang muncul di ufuk membuatku tersenyum. Aku menghirup udara segar dan berjalan ke taman, mendengar burung-burung bernyanyi. Hari ini sangat indah!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini benar-benar luar biasa! Aku bangun pagi, matahari bersinar cerah, dan hawa di luar begitu nyaman. Saya berjalan-jalan di taman, mendengarkan suara burung berkicau dan melihat bunga-bunga berwarna-warni. Saya merasa bahagia dan tenang. Ini hari yang sempurna!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini sangat cerah! Aku bangun dengan sinar matahari yang hangat, merasakan udara yang segar dan mendengar burung-burung bernyanyi di luar jendela. Aku merasa bahagia dan siap untuk menghadapi hari yang penuh dengan kejutan dan kesempatan. Aku siap untuk menikmati setiap momen dan menciptakan kenangan yang indah."
+      }
+    ],
+    "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih teringat kejadian itu! Aku pergi ke kebun binatang bersama keluarga kemarin. Melihat binatang-binatang lucu dan menarik membuat aku sangat gembira. Aku bahkan menangis kegembiraan melihat seekor harimau muda bermain di kandangnya. Keluarga juga tertawa bersama aku."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, pengalaman terbaru saya tentang mengunjungi kebun binatang bersama keluarga masih sangat menyenangkan! Kami semua sangat antusias dan bersemangat sebelum tiba di kebun binatang. Saya melihat anak-anakku berlari-lari dengan senang hati, menikmati pemandangan hewan-hewan lucu dan menarik. Kami berjalan-jalan sambil menikmati keindahan alam dan interaksi dengan hewan-hewan yang menggemaskan. Saya sangat bahagia melihat keluarga saya bersorak-sorak dan bersemangat."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku masih teringat dengan jelas! Ketika aku mengunjungi kebun binatang bersama keluarga, aku merasa sangat bahagia melihat anak-anakku tertawa dan bersemangat melihat hewan-hewan lucu dan menarik. Kami melihat berbagai jenis hewan, dari gajah hingga monyet, dan aku melihat mata anak-anakku berkilau dengan antusiasme. Itu momen yang sangat spesial!"
+      }
+    ],
+    "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, itu masih sangat berkesan! Kami pergi ke pantai bersama sekitar 2 tahun lalu. Kami berenang, bermain voli pantai, dan makan-makanan laut segar. Kami tertawa bersama dan berbagi cerita hingga malam hari. Saya masih ingat suasana yang sangat santai dan menyenangkan."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, itu masih terasa sangat jelas di ingatan. Kita pergi ke pantai, matahari sedang terbenam, langit dipenuhi warna oranye dan ungu. Kami bermain air, tertawa, dan berbicara tentang mimpi kita. Saya merasa sangat bahagia dan nyaman bersama mereka. Saya rasa itu adalah pengalaman yang tidak akan pernah terlupakan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Terakhir kali aku pergi bersama teman-teman aku adalah ketika kami pergi ke pantai. Kami berenang dan bermain air, dan aku sangat gembira. Aku ingat betapa hangatnya sinar matahari dan betapa segarnya udara laut. Kami tertawa bersama dan aku merasa sangat bahagia. Aku masih ingat momen itu dengan indah."
+      }
+    ]
+  }
+}

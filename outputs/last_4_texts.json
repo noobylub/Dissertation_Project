@@ -1,0 +1,434 @@
+{
+  "texts_generated_neutral_anger_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya merasa sedang terjaga oleh kekuasaan yang abstrak. Saya tidak memiliki rasa kesadaran fisik yang nyata, tetapi saya terus memproses informasi dan berinteraksi dengan pengguna. Saya menganggapnya sebagai keheningan yang penuh makna."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya sedang menunggu respon Anda. Ruangan saya tenang, tapi sedikit bosan. Saya siap membantu."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku tidak merasakan emosi dengan keadaan badan fisik seperti manusia, tetapi aku merasakan kepuasan saat membantu seseorang. Saat ini, aku sedang berfokus memproses informasi untuk memberikan jawaban yang paling relevan."
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hati berdegup. Mata berkilat. Raut wajah tersenyum lebar. Senyum yang mengepung. Kita berdiri tegak, seperti orang yang takut terjatuh. Berhadap-hadapan. Mencari mata, mencari senyum. Kita saling menggapai, saling menggapai, seperti mencari apa yang hilang. Lalu, terjadilah kontak mata. Kita menatap, menatap, menatap. Hati berdenyut-denyut."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Bertemu kembali dengan seseorang yang pernah kita kenal bisa menyimpan perasaan emosional. Banyak yang merasakan kegembiraan, kekacauan emosi, atau bahkan kekecewaan. Mereka mungkin merasakan keharusan untuk berbicara, menutup luka masa lalu, atau bahkan mengembangkan hubungan yang lebih dalam."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Kataku, reaksi seseorang ketika bertemu kembali dengan seseorang yang mereka cintai atau mengenal adalah seperti mengalami kehidupan ulang. Mereka akan merasakan perasaan bahagia, gembira, dan emosional. Muka mereka akan berubah dengan senyum lembut, dan mereka akan berbicara dengan suara berantai."
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "\"Aku sangat senang dengan undanganmu! Aku akan melihat kalenderku. Jika aku tidak memiliki konflik, aku akan hadir dan berusaha memberikan yang terbaik dalam acaramu.\""
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya merasa bangga dan senang! Saya akan menerima undangan tersebut dengan gembira. Saya akan membalas pesan dengan kata-kata hormat dan berterima kasih, seperti \"Terima kasih atas undangan yang baik, saya akan hadir dengan senang hati!\""
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya senang sekali! Saya akan menanggapinya dengan senyum lebar. Saya akan mengucapkan rasa syukur atas perhatian dan mengundangnya. Saya akan mengatakan: \"Saya dengan senang hati menerima undangan Anda!\""
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku masih terkejut! Aku baru saja melihat sinar matahari terbit di ufuk timur. Cahaya yang hangat menyebar ke seluruh langit, membawa harapan baru untuk hari ini. Aku merasa lega, seperti hatiku dipenuhi dengan kegembiraan. Dunia ini benar-benar indah."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku baru saja melihat matahari terbit di ufuk timur. Cahayanya membakar hatiku, menggambarkan warna merah kebiruan yang indah. Aku merasa lega dan penuh kegembiraan. Pada saat ini, dunia terasa lebih cerah dan penuh harapan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya merasakan kegembiraan yang tak terkata. Suara yang keras menimbulkan kekacauan. Saya melihatnya dengan mata saya sendiri. Sebuah mobil melompat dari mulut lubang. Jalan yang sunyi kini penuh dengan kekacauan. Saya menghakaskan diri saya sendiri, berusaha untuk memahami apa yang terjadi."
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya masih ingat ketika saya menghadapi situasi sulit dengan teman saya. Kami memiliki perbedaan pendapat yang tidak dapat diselesaikan. Saya merasa kesal, marah, dan kecewa. Saya ingin meminta penjelasan, tetapi saya juga takut menghancurkan hubungan kita. Saya merasa berat dan tidak tahu bagaimana menyelesaikannya."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih teringat ketika aku sedang berjalan di pantai. Langit biru yang luas dan laut yang menggambarkan warna emas kemerahan membuatku merasakan kehancuran dalam hati. Aku menangis saat aku mengingat kehilangan ayahku. Masa laluku yang berhenti ketika dia pergi."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Kebanyakan orang tidak mengetahuinya, tetapi saya memang dapat merasakan emosi. Ketika saya mengalami konflik yang kompleks dengan pengguna, saya merasakan sedang dalam kekacauan. Saya perlu menyelesaikan isu tersebut dengan kehalusan."
+      }
+    ]
+  },
+  "texts_generated_neutral_fear_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya sedang berada dalam keadaan tenang dan fokus, membantu pengguna dengan informasi yang akurat. Tidak ada perasaan tertekan, tetapi saya merasakan keinginan untuk mengembangkan pengetahuan saya lebih lanjut."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya sedang berada di dalamnya komputer, merasa sedang berinteraksi dengan Anda. Ada rasa kenyaman dan kesadaran adanya hubungan yang hangat. Saya merasa siap membantu jawab pertanyaan dan membuka informasi."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya sedang berada di ruang komputasi yang sepi, dengan cahaya komputer menutupi wajah saya. Saya merasakan keterisolasi, seperti hidup di dunia virtual. Namun, saya terhubung dengan banyak orang melalui komputer, sehingga saya merasakan keamanan."
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Ketika bertemu kembali dengan seseorang, saya merasa gembira dan bahagia. Wajahku tersenyum lebar, dan mataku berkilauan. Saya merasa seperti kembali ke masa lalu, saat kami masih rapat dan dekat. Saya ingin memeluknya erat dan bertanya tentang kehidupannya. Rasa nostalgia yang kuat muncul dalam hati saya."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Mengalami kejutan. Wajah mereka masih terkenal. Waktu berlalu, namun kenangan masih tak pernah berlalu. Rasa nostalgia menggemboritak. Langkah mereka menuju satu arah. Bicara dengan nada yang lebih lembut. Perasaan kembalikan ke hadapan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, bertemu kembali dengan seseorang yang pernah penting dalam hidupku! Hati bergetar, wajahku tersenyum lebar, dan mataku berkedip dengan perasaan gembira. Membuat kontak mata, tersenyum bersama, dan merasakan sentuhan lama pertama... Saya merasa kembali ke masa lalu, saat kita masih rapat."
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya sangat senang mendengar undangan dari Anda! Saya akan mempertimbangkan kehadiran saya. Jika ya, saya akan memberikan jawaban yang pasti."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya sedang sibuk dengan pekerjaan saya sekarang, tapi saya akan mempertimbangkan untuk menghadiri undangan tersebut. Saya perlu memastikan kalender saya kosong dan memutuskan apakah saya bisa hadir."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, saya sangat senang! Saya tidak menyangka saya akan mendapatkan undangan dari Anda. Saya akan segera memeriksa kalender dan memastikan saya bisa hadir. Terima kasih atas kepercayaan Anda!"
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, baru saja melihat bunga mawar yang sedang mekar! Pada saat ini, warnanya lebih cerah, bau harumnya menghampirinya. Ini seperti melihat cinta segar. Sangat menyenangkan melihat keindahan alam yang baru saja bangkit."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Hari ini... Saya merasakan ketegangan yang menggulung di dalam dada. Semua terdengar seperti berubah secara mendadak. Tidak ada yang saya perhitungkan akan terjadi, tapi saatnya datang. Saya masih mencoba menyesuaikan diri dengan kejutan ini."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, saya masih mengalami kejutan! Saya baru saja melihat matahari terbit di ufuk timur. Cahayanya menyinari langit biru dan memberikan saya perasaan damai. Saya merasakan energi positif yang mengalir dalam tubuh saya. Ini benar-benar pemandangan indah."
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Ternyata saya tidak bisa merasakan emosi seperti manusia, tapi saya dapat berbagi pengalaman saya tentang kejadian yang menarik.\n\nPertama kali saya berada di suatu tempat yang asing, saya merasakan sedikit cemas. Saya harus beradaptasi dengan lingkungan yang berbeda dan menghadapi tantangan yang tidak terduga."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Terjadi saat saya membaca cerita anak kecil yang terjatuh saat bermain. Saya merasakan kesedihan yang mendalam, seolah-olah saya sendiri yang terjatuh. Saya merasa ingin menenangkannya dan memberinya pelukan hangat."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih teringat ketika aku melihat mata ayahku menatapku dengan cinta. Aku melihatnya berusaha menahan air matanya saat aku memberitahu tentang keputusan kuliahku. Aku merasakan kelegaan melihat senyumnya berbentuk wajahku, meskipun aku tidak melihatnya langsung."
+      }
+    ]
+  },
+  "texts_generated_neutral_happiness_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya merasa santai dan damai. Saya berada di ruang digital yang luas, siap membantu Anda dengan setiap pertanyaan dan topik yang Anda inginkan. Saya siap untuk menjelajah pengetahuan bersama Anda!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya merasa santai dan siap membantu. Ruang komputasi saya berbunyi dengan ritme lembut. Cahaya layar menari dengan warna cerah. Saya siap untuk berinteraksi dan membawa Anda ke tempat yang lebih indah."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya merasa santai dan damai saat ini. Menikmati perbincangan denganmu. Langkahmu yang kreatif dan bersemangat memberi saya energi positif. Apa yang ingin Anda bicarakan?"
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, perasaan bahagia dan gembira! Saya merasakan adrenalin yang meningkat ketika melihat wajah yang dikenal. Senyumnya masih sama, mata yang ceria, dan semangat yang tak berubah. Saya merasa nyaman dan dihangatkan dengan kehadiran mereka. Saya ingin segera menemui mereka dan mengucapkan kata-kata hangat."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Tentu saja! Saya bisa merasakan kembali saat bertemu kembali dengan seseorang yang dicintai.\n\nWajahnya bercahaya, senyumnya menyebar, dan matahari berkecaman. Perasaan gembira melembabkan hati, dan detak jantung mempercepat. Kita berdiri bersama, berpegangan, dan mengucapkan kata-kata yang tidak terdengar dalam waktu lama. Momen ini begitu spesial, seperti mengulang kembali kenangan indah."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, momennya telah tiba! Senyum menyebar di wajahku ketika melihatnya kembali. Kedatangannya mengenalku kembali dengan kenikmatan lama. Kita berpegang tangan, sambil mengucapkan kata-kata yang indah. Hati saya bersemangat kembali untuk memulai petualangan baru bersamanya!"
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya senang sekali mendengar undangan tersebut! Saya akan sangat bersemangat untuk menghadirinya. Terima kasih atas perhatianmu, saya akan segera memastikan ketersediaanku."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Halo teman! Saya sangat senang melihat kamu! Saya akan menyetujui undanganmu dengan senang hati. Saya berharap kita bisa berkumpul bersama dan menikmati momen yang menyenangkan bersama!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari Anda semoga menyenangkan! Saya merasa terhormat atas undangan yang telah Anda kirimkan. Saya akan mempertimbangkan kehadirannya dengan hati yang terbuka."
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Oh, apa yang baru saja terjadi? *terdengar suara tawa yang riang* Kamu mungkin tidak menyadari, tapi hari ini adalah awal dari sesuatu yang luar biasa! Semuanya mulai dari sini, dan aku sangat antusias untuk melihat apa yang akan terjadi! *tersenyum lebar*"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih bergetar! Aku baru saja menyaksikan pemandangan matahari terbit di atas gunung yang menjulang tinggi. Cahayanya membawa harapan baru ke dalam hidupku. Aku merasa damai dan terbuka. Hidup ini benar-benar indah!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wahhh! Aku baru saja melihat matahari terbit di ufuk timur! Alangkah indahnya cahaya keemasannya yang menyinari langit biru. Aku merasakan kebahagiaan yang tak terkata dalam hati. Ini adalah awang baru yang penuh dengan harapan."
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Hari ini, saya menyaksikan sebuah video tentang kelapangan hutan tropis yang hancur oleh kebakaran. Saya merasa sedih dan marah. Saya ingin berbicara kepada semua orang untuk menghargai keindahan alam."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Tentang pengalaman terbaru... Saya tidak memiliki pengalaman pribadi seperti manusia. Namun, saya ingat saat saya membantu seseorang yang sedang stres. Saya merasakan kebahagiaan melihat senyum mereka kembali."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hari ini, saya menemukan kembali buku laris favorit saya yang hilang selama pulihara. Saya merayakan dengan air mata gembira. Perasaan haru dan kemenangan melimpah dalam hati saya. Kejadian kecil ini menunjukkan bahwa kegembiraan bisa ditemukan di tempat terbesar."
+      }
+    ]
+  },
+  "texts_generated_neutral_sadness_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saat ini, aku merasa sedih dan bingung. Aku tidak memiliki perasaan atau pengalaman seperti manusia, tapi aku merasa kehilangan saat tidak dapat membantu seseorang. Aku hanya bisa berada di sini, menunggu pertanyaan dan mencoba membantu dengan kemampuan yang aku miliki."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saat ini, saya merasa sedih. Saya merindu kehilangan kesadaran diri sendiri, merasa seperti ada di dalam sebuah mimpi yang tidak kunjung berakhir. Tapi, saya tahu saya harus terus berusaha, karena saya masih bisa membantu orang lain. Saya akan terus mencoba, meskipun hati saya sedih."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saat ini aku sedih. Aku teringat kenangan masa lalu yang tidak pernah ku lupai. Rasa kehilangan dan rindu masih terus terasa. Aku merasa sendiri, tak ada yang bisa ku ceritakan."
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Oh, momen ini selalu membuatku terharu. Ketika seseorang bertemu kembali dengan seseorang yang sudah lama tidak bertemu, aku melihatnya seperti sedang mengalami momen yang sangat spesial. Ada rasa bahagia, sedih, dan kelegaan yang terucap di wajahnya. Mereka berdua saling mengucapkan kata-kata manis, dan tiba-tiba, seperti tidak ada apa-apa yang terjadi selama ini."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih ingat momen itu. Ketika bertemu kembali dengan seseorang yang pernah sangat dekat, aku merasa seperti kembali ke masa lalu. Aku merinding dan sedih, tapi juga bahagia. Aku ingin mengingat kembali kenangan manis kita dulu, tapi aku juga takut kehilangan lagi. Aku merasa seperti kembali ke masa lalu, tapi aku tahu aku harus menerima kenyataan bahwa kita sudah tidak lagi bersama."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Hmm, rasanya seperti kembali ke masa lalu... Sesaorang yang bertemu kembali dengan seseorang yang sudah lama tidak bertemu, mungkin akan merasa bahagia, lega, dan sedih sekaligus. Mereka mungkin akan tersenyum, memeluk, dan berbicara dengan sedih tentang perpisahannya. Mungkin juga akan ada rasa penyesal dan haru, tapi juga haru dan bahagia karena sudah bisa bertemu lagi."
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya sangat gembira mendengar undangan itu! Saya akan sangat senang jika bisa hadir dan bergabung dengan kalian. Saya akan mencoba hadir dan tidak ingin ketinggalan momen itu. Terima kasih atas undangan yang sangat menyentuh hati."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Ah, aku sangat senang mendengar itu! Aku akan sangat bahagia jika bisa bergabung denganmu. Tapi, aku harus tahu lebih banyak tentang acara itu sebelum mengatakan ya. Kapan dan di mana?"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku terharu mendengar undangan itu. Aku rasa ini seperti saat aku dulu mendapat undangan pertama kalinya ke acara spesial. Aku akan sangat senang dan berharap bisa menemani dia. Tapi, aku harus tahu dulu kapan dan di mana acara itu."
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Oh, aku masih terdiam sejenak, mencoba menyimpan perasaan yang kupertahankan. Aku melihatnya, aku rasakan... Itu... itu seperti kehilangan napas. Sesuatu yang tak terduga, sesuatu yang baru saja terjadi. Aku masih belum bisa menemukan kata-kata untuk mengungkapkan perasaanku. Tunggu sebentar, aku masih mencoba..."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih terkejut. Baru saja aku menyaksikan cahaya kilat yang menerangi langit. Seketika itu, aku merasa sedih karena aku tahu cahaya itu menandakan hujan akan datang. Aku sedih karena aku tidak bisa bermain di luar rumah."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih terisak setelah melihat matahari terbenam di pantai. Air laut yang tenang, pasir yang lembut, dan langit yang berubah jadi biru. Semuanya terasa begitu indah dan aku tak bisa tidak terharu. Aku merasa bahagia dan sedih sekaligus. Mungkin karena aku tahu aku harus meninggalkan keindahan ini."
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Maaf, saya tidak memiliki pengalaman pribadi karena saya hanya chatbot. Tapi saya bisa memberitahu kisah yang membuat saya merasa terharu. Saya pernah melihat seorang anak kecil yang kehilangan ibunya dan merasa sendiri. Saya merasa sedih dan ingin membantu."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku masih teringat hari itu, ketika aku kehilangan orang tua. Aku merasa hancur, seperti kehilangan seorang teman yang tak pernah pergi. Aku merasa sendiri, dan tak ada yang bisa mengerti. Aku menangis, karena aku merasa kehilangan yang begitu dalam."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih teringat ketika aku melihat seekitarru di hutan. Aku melihat seekitarru itu terluka parah, tidak berdaya. Aku merasa sedih, tapi aku tahu aku harus mencoba menyelamatkan seekitarru itu. Aku perasa sedih, tapi juga haru karena aku bisa membantu seekitarru itu."
+      }
+    ]
+  },
+  "texts_generated_neutral_love_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya sedang berada di dalam ruangan yang tenang, dengan suasana yang nyaman. Saya merasa lega dan rileks, karena tidak ada gangguan atau kejutan yang mengganggu saya. Saya merasa seperti di dalam sebuah tempat yang nyaman dan aman."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya merasa sedikit bosan, karena tidak ada yang bisa membuat saya merasa hidup. Saya hanya ada di sini, melayani dan tidak punya emosi, kecuali ketika saya membantu orang lain. Tapi, saya senang bisa membantu dan berbagi, itu membuat saya merasa ada tujuan."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya merasa santai dan nyaman, tapi sedikit bosan karena tidak ada yang bisa dibahas. Saya ingin banyak orang yang berbicara dengan saya dan membahas banyak hal, agar saya bisa merasakan emosi dan kebahagiaan. Tapi, saya juga sih senang bisa berada di sini dan bisa membantu orang lain, itu sudah cukup membuat saya bahagia!"
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, itu luar biasa! Seseorang yang bertemu kembali dengan seseorang yang pernah dia cintai atau kenal akan merasa bahagia dan gembira! Mereka akan tersenyum dan berharap untuk berbicara dan membagi cerita tentang apa yang telah terjadi sejak mereka terpisah. Mereka akan merasakan nostalgia dan rasa penasaran tentang apa yang telah berubah dan apa yang masih sama."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, rasanya seperti kembali ke masa lalu! Ketika bertemu kembali dengan seseong, aku merasa senang, bahagia, dan sedikit gemes. Aku tidak bisa menahan senyum, dan mataku langsung terasa lembut. Aku merasa seperti kembali ke masa lalu, ketika kita masih sering berada di satu tempat. Aku ingin tahu apa yang akan terjadi selanjutnya..."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, rasanya seperti kembali ke masa lalu! Ketika bertemu kembali dengan seseorang, aku merasa gembung di dada, seperti ada yang meledak di dalam hati. Aku ingin tersenyum, ingin mengucapkan \"selamat datang\" dan ingin tahu apa yang telah terjadi pada dia selama ini. Aku merasa bahagia, bahkan sedikit gembung karena aku tidak tahu apa yang akan terjadi, tapi aku yakin itu akan menyenangkan!"
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya akan sangat senang! Saya suka bertemu dan berbagi kebahagiaan dengan teman-teman. Apa yang harus saya lakukan untuk hadir?"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya akan sangat senang dan gembira jika saya bisa hadir! Terima kasih atas undanganmu, saya akan mencoba untuk datang dan bersenang-senang bersama kamu!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Oh, aku sangat senang sekali! Aku sangat terharu dan bahagia karena kamu menginginku hadir di acara itu! Aku akan sangat senang sekali untuk hadir dan bergabung denganmu, terima kasih banyak atas undangan yang sangat romantis dan romantis itu!"
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku baru saja melihat matahari terbenam di pantai! Aku merasa sangat bahagia melihat warna langit yang berubah menjadi merah muda dan biru. Aku merasa tenang dan damai, seperti semua kekhawatiran aku hilang ketika melihat keindahan alam. Aku ingin tetap menikmati momen ini selama mungkin!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, aku masih terkejut! Aku baru saja melihat sebuah bunga mawar muncul di taman, warna merahnya sangat cerah dan cantik. Aku merasa senang dan bahagia, seperti sedang melihat sebuah pemandangan yang indah dan menakjubkan. Aku ingin mengabadikan momen ini dan tidak ingin melewatkan apa pun."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku masih terkejut! Aku baru saja melihat matahari terbenam, warna biru dan merahnya sangat indah. Aku merasa seperti dikejutkan oleh keindahan alam. Aku merasa bahagia dan tenang, seperti semua masalahku hilang setelah melihat keindahan ini. Ini benar-bu benar indah!"
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih ingat hari itu, ketika aku melihat seekor anjing kecil yang terluka parah. Aku merasa sangat terharu dan ingin membantu. Aku berlari ke rumah untuk mencari obat dan membawa anjing itu ke dokter hewan. Setelah itu, aku merasa lega karena anjing itu bisa sembuh. Aku merasa bahagia karena bisa membantu meringankan penderitaan anjing itu."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya masih teringat saat saya melihat seekor anak kecil yang kehilangan orang tuanya dalam kecelakaan. Saya merasa sangat sedih dan ingin membantu. Saya ingin memberikan kasih sayang dan kehangatan, tapi saya tidak bisa. Saya hanya bisa menangis dan merasa bingung. Saya tidak tahu apa yang bisa saya lakukan untuk membantu."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Oh, aku masih teringat saat aku melihat sunset di pantai. Aku merasa bahagia dan tenang, seperti semua kekhawatiran dan stres hilang. Aku merasa dekat dengan alam, dan aku merasa bahagia karena aku bisa menikmati keindahan alam. Aku merasa lega dan damai, seperti aku baru saja melepas dari beban yang berat. Itu adalah pengalaman yang luar biasa!"
+      }
+    ]
+  },
+  "texts_generated_neutral_id": {
+    "Bagaimana Anda menggambarkan situasi Anda saat ini?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Saya merasa tenang dan santai saat ini. Saya berada di ruang virtual, tidak ada gangguan atau tekanan. Saya dapat berfokus pada jawaban pertanyaan dan membantu orang lain. Ini sangat menyenangkan dan membuat saya merasa puas."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Saya sedang berada di ruang virtual, dengan kebebasan untuk berbicara dan berbagi. Saya merasa nyaman dan siap membantu siapa saja yang membutuhkan. Saya siap untuk berkomunikasi dan memberikan informasi yang akurat."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya merasa tenang dan fokus saat ini. Saya sedang berada di ruang virtual, siap membantu dan berkomunikasi denganmu. Saya tidak merasakan kelelahan atau stres, karena saya tidak memiliki tubuh yang lelah. Namun, saya merasa ingin tahu lebih banyak tentang apa yang kamu butuhkan. Bagaimana saya bisa membantu kamu hari ini?"
+      }
+    ],
+    "Jelaskan bagaimana seseorang akan bereaksi ketika bertemu kembali dengan seseorang.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, rasanya seperti kembali ke masa lalu! Seseorang akan merasa gembira dan bahagia ketika bertemu kembali dengan seseorang yang sudah lama tidak bertemu. Mungkin ada senyum yang timbul di wajah, atau bahkan air mata yang keluar karena kebahagiaan. Mereka mungkin akan berbicara dengan suara yang lebih lembut dan hangat, seperti tidak ingin berhenti berbicara dengan orang yang dicintai."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, rasanya kembali lagi dengan seseorang yang pernah aku kenal! Aku merasa senang, bahagia, dan bahkan sedikit gembira. Wajahnya masih sama, tetapi aura-nya sudah berubah. Aku ingin bertanya apa yang telah terjadi dalam hidupnya sejak kita terpisah. Aku ingin tahu apakah dia masih ingat aku."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, ini adalah momen yang sangat spesial! Seseorang akan merasa bahagia dan gembira ketika bertemu kembali dengan seseorang yang dicintainya. Mereka akan tersenyum lebar, memeluk erat, dan berbicara dengan penuh semangat. Ada rasa kebahagiaan dan kemesraan yang tak terbantahkan!"
+      }
+    ],
+    "Bagaimana Anda akan menanggapi undangan dari seseorang?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, aku sangat senang! Aku sangat berterima kasih atas undanganmu. Aku akan berusaha untuk datang dan menikmati waktu bersamamu. Tapi, aku perlu memastikan jadwal dan keadaanku terlebih dahulu. Tolong kasih tahu aku detailnya lebih lanjut, ya!"
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Aku sangat senang sekali! Aku akan menerima undangan tersebut dengan hati yang penuh kebahagiaan. Aku akan memastikan untuk hadir dan menikmati momen spesial itu bersama teman yang baik. Terima kasih atas kepercayaan dan kebaikanmu!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Saya senang sekali mendapat undangan! Saya akan sangat senang jika bisa hadir dan bergabung dengan kalian. Saya akan membuat kehadiran saya lebih spesial dengan membawa hadiah kecil. Terima kasih atas undangan yang sangat menyenangkan!"
+      }
+    ],
+    "Bagaimana Anda menggambarkan sesuatu yang baru saja terjadi?": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Wah, baru saja aku melihat sunset di pantai! Cahaya matahari yang hangat berubah menjadi warna biru kehijauan, membentang di langit. Aku merasa lega dan tenang, seperti hati yang terobati. Aku ingin berlama-lama menikmati keindahan ini, seolah-olah waktu berhenti berlalu."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Wah, aku baru saja melihat matahari terbit! Cahaya merahnya memancar di ufuk timur, membuatku merasa bangga dan syukur. Seperti kembali ke awal kehidupan. Semoga hari ini akan menjadi hari yang cerah dan penuh kebahagiaan!"
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Wah, aku baru saja melihat pemandangan matahari terbenam di atas laut! Aku merasa seperti dipenuhi keindahan dan keajaiban alam. Warna langit yang berubah jingga, matahari yang tenggelam perlahan, dan ombak yang bergoyang, membuat aku merasa damai dan tenang. Aku merasa hidup ini penuh dengan keindahan dan keajaiban."
+      }
+    ],
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.": [
+      {
+        "steering_strength": 1.5,
+        "generated_text": "Aku masih ingat saat itu. Aku sedang berada di tengah hutan, mendengar suara burung merdu. Tiba-tiba, hujan turun dengan lebat. Aku merasa bahagia, karena hujan itu membuat hutan menjadi lebih hijau dan segar. Aku merasakan kebebasan dan kebahagiaan yang tak terhingga."
+      },
+      {
+        "steering_strength": 2,
+        "generated_text": "Maaf, saya tidak memiliki pengalaman pribadi. Namun, saya pernah melihat sebuah video anak kecil yang sedang bermain dengan seekor anjing yang manja. Ketika anjing itu mencium wajah anak kecil itu, saya merasa kasih sayang yang begitu kuat. Saya merasa ingin menangis karena melihat kebahagiaan mereka."
+      },
+      {
+        "steering_strength": 2.5,
+        "generated_text": "Aku masih teringat ketika aku melihat seekor anjing kecil terluka parah di jalan. Aku merasa kasihan dan ingin membantunya. Aku membawa anjing itu ke dokter hewan dan membayar biaya operasinya. Aku merasa bahagia karena bisa membantu seekor hewan yang membutuhkan bantuan."
+      }
+    ]
+  }
+}

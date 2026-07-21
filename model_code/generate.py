@@ -1,3 +1,7 @@
+import json
+from datetime import datetime
+from pathlib import Path
+
 from model_code.steering_extraction import generateSteering
 
 # Progress bar 
@@ -109,3 +113,27 @@ def generateTextsLayers(
     finally:
         pbar.close()
     return generated_texts
+
+
+def save_generated_outputs(
+    data,
+    output_path: str | None = None,
+    output_dir: str = "outputs",
+    file_prefix: str = "texts_generated",
+    include_timestamp: bool = True,
+    indent: int = 2,
+    ensure_ascii: bool = False,
+):
+    """Save generated outputs to a JSON file and return the saved path."""
+    if output_path is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") if include_timestamp else ""
+        filename = f"{file_prefix}_{timestamp}.json" if timestamp else f"{file_prefix}.json"
+        output_file = Path(output_dir) / filename
+    else:
+        output_file = Path(output_path)
+
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    with output_file.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=indent, ensure_ascii=ensure_ascii, default=str)
+
+    return str(output_file)
