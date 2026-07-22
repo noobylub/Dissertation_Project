@@ -13,10 +13,10 @@ prompts_neutral_id = [
 prompt_neutral_id_1 = [
     # best one out of the four
     "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.",
-    "Berikanlah cerita tentang hari ini ?",
-    "Ceritakan tentang sesuatu yang sangat ingin dilakukan seseorang hari ini.",
-    "Tuliskan monolog karakter fiksi tentang sesuatu yang sangat ia inginkan.",
-    "Tuliskan sebuah cerita pendek tentang seseorang yang sangat menginginkan sesuatu.",
+    "Ceritakanlah apa saja yang anda lakukan hari ini ?",
+    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.",
+    "Tuliskan cerita tentang orang bekerja",
+    "Tuliskan sebuah cerita pendek tentang seseorang yang sangat menginginkan sesuatu di dunia ini",
     # "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?",
     # "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.",
     # "Bagaimana Anda menggambarkan situasi Anda saat ini?",
