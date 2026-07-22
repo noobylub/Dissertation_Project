@@ -133,7 +133,8 @@ def retrieve_steering_vector(
             vector = _extractAllLayer(prompt, model, tokenizer) # [32,4096]
             # For analysis purposes
             for lid in layer_id:
-                emotion_vectors[emotion].append(vector[lid].cpu().numpy())
+                # Cast to float32 before NumPy conversion to avoid bfloat16 incompatibility.
+                emotion_vectors[emotion].append(vector[lid].to(torch.float32).cpu().numpy())
             vectors[emotion] += vector
     
     if only_return_emotion_vectors:
