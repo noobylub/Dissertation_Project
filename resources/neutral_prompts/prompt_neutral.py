@@ -3,7 +3,7 @@
 prompts_neutral_id = [
     "Seseorang menunggu kabar penting selama beberapa hari. Tuliskan bagaimana ia menghadapi situasi itu.",
     
-    "Bagaimana perasaanmu jika kamu mendapatkan kesempatan untuk mengatakan sesuatu yang dulu tidak sempat kamu katakan?"
+    "Bagaimana perasaanmu jika kamu mendapatkan kesempatan untuk mengatakan sesuatu yang dulu tidak sempat kamu katakan?",
     "Ceritakan tentang satu hari biasa yang tiba-tiba berubah menjadi tidak biasa.",
     "Seseorang harus memilih antara dua keputusan yang sama-sama sulit. Jelaskan apa yang ia pikirkan.",
     "Tuliskan pesan singkat dari seseorang kepada orang lain setelah sebuah kejadian penting.",
@@ -11,12 +11,17 @@ prompts_neutral_id = [
 ]
 
 prompt_neutral_id_1 = [
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada hari libur. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada hari kerja. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada akhir pekan. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
     # best one out of the four
-    "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.",
-    "Ceritakanlah apa saja yang anda lakukan hari ini ?",
-    "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.",
-    "Tuliskan cerita tentang orang bekerja",
-    "Tuliskan sebuah cerita pendek tentang seseorang yang sangat menginginkan sesuatu di dunia ini",
+    # "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.",
+    # "Ceritakanlah apa saja yang anda lakukan hari ini ?",
+    # "Ceritakan pengalaman terbaru ketika Anda merasakan emosi yang kuat.",
+    # "Tuliskan cerita tentang orang bekerja",
+    # "Tuliskan sebuah cerita pendek tentang seseorang yang sangat menginginkan sesuatu di dunia ini",
     # "Ceritakanlah pengalaman terbaru tentang mengunjungi kebun binatang bersama keluarga?",
     # "Ceritakan tentang terakhir kali Anda pergi bersama teman-teman Anda.",
     # "Bagaimana Anda menggambarkan situasi Anda saat ini?",
