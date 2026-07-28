@@ -153,6 +153,7 @@ def create_dataloader(
         return train_loader, val_loader
 
     correct_vectors = emotion_dict[emotion]
+    correct_vectors = list(correct_vectors) if not isinstance(correct_vectors, list) else correct_vectors
     # Get all incorrect, stack them, shuffle them, then retrieve the same number as correct vectors.
     incorrect_vectors = [
         vec for emo, vecs in emotion_dict.items() if emo != emotion for vec in vecs
@@ -163,7 +164,11 @@ def create_dataloader(
     y_correct = torch.ones(len(correct_vectors))
     y_incorrect = torch.zeros(len(incorrect_vectors))
     
-    X = torch.tensor(correct_vectors + incorrect_vectors, dtype=torch.float32)
+    all_vectors = correct_vectors + incorrect_vectors
+    if isinstance(all_vectors[0], torch.Tensor):
+        X = torch.stack([v.float() for v in all_vectors], dim=0)
+    else:
+        X = torch.tensor(np.asarray(all_vectors), dtype=torch.float32)
     y = torch.cat([y_correct, y_incorrect])
 
     # Split into training and validation sets

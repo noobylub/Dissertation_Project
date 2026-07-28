@@ -96,7 +96,8 @@ def retrieve_steering_vector(
     emotion_sets: dict, 
     name_folder: str, 
     layer_id=[21],
-    only_return_emotion_vectors=False
+    only_return_emotion_vectors=False,
+    retrieve_all_layers=False
     ):
     """
     Retrieves a steering vector for a given emotion by passing the emotional text as inference
@@ -132,9 +133,12 @@ def retrieve_steering_vector(
         for prompt in prompts:
             vector = _extractAllLayer(prompt, model, tokenizer) # [32,4096]
             # For analysis purposes
-            for lid in layer_id:
-                # Cast to float32 before NumPy conversion to avoid bfloat16 incompatibility.
-                emotion_vectors[emotion].append(vector[lid].to(torch.float32).cpu().numpy())
+            if retrieve_all_layers:
+                emotion_vectors[emotion].append(vector.to(torch.float32).cpu().numpy())
+            else:
+                for lid in layer_id:
+                    # Cast to float32 before NumPy conversion to avoid bfloat16 incompatibility.
+                    emotion_vectors[emotion].append(vector[lid].to(torch.float32).cpu().numpy())
             vectors[emotion] += vector
     
     if only_return_emotion_vectors:
