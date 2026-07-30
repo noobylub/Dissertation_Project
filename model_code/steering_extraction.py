@@ -313,6 +313,92 @@ def generateSteering(
         return generated_text
 
 
+def generateBatchedSteering(
+    user_texts: list[str],
+    system_text: str,
+    model,
+    tokenizer,
+    steering_vector=None,
+    steering_strength=1.0,
+    target_layers=None,
+    max_new_tokens=200,
+    temperature=0.7,
+    do_sample=True,
+):
+    """Generate text for a batch of user_texts with optional steering applied to specified layers."""
+    # Format hte messaget
+    messages = [
+        {"role": "system", "content": system_text},
+    ] + [{"role": "user", "content": text} for text in user_texts]
+
+    # Apply chat template without tokenizing, then tokenize separately
+    text_for_model = tokenizer.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True
+    )
+
+    inputs = tokenizer(
+        text_for_model,
+        return_tensors="pt",
+        padding=True
+    ).to(model.device)
+
+    # we want to make sure the steering vector is on the same device 
+    # AND that the steering vector is the correct shape and type
+    if steering_vector is not None:
+        if steering_vector.shape[0] != model.config.num_hidden_layers or steering_vector.shape[1] != model.config.hidden_size:
+            raise ValueError(f"steering_vector must have shape [{model.config.num_hidden_layers}, {model.config.hidden_size}]")
+        if steering_vector.device != model.device:
+            steering_vector = steering_vector.to(model.device)
+        if steering_vector.dtype != next(model.parameters()).dtype:
+            steering_vector = steering_vector.to(next(model.parameters()).dtype)
+
+    input_ids = inputs["input_ids"]
+    attention_mask = inputs["attention_mask"]
+    input_lengths = attention_mask.sum(dim=1).tolist()
+
+    if steering_vector is None:
+        with torch.no_grad():
+            outputs = model.generate(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                max_new_tokens=max_new_tokens,
+                temperature=temperature,
+                do_sample=do_sample,
+                pad_token_id=tokenizer.eos_token_id,
+                eos_token_id=tokenizer.eos_token_id,
+            )
+    else:
+        with SteeringApplier(model, steering_vector, steering_strength, target_layers):
+            with torch.no_grad():
+                outputs = model.generate(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    max_new_tokens=max_new_tokens,
+                    temperature=temperature,
+                    do_sample=do_sample,
+                    pad_token_id=tokenizer.eos_token_id,
+                    eos_token_id=tokenizer.eos_token_id,
+                )
+
+
+
+    generated_texts = []
+    for i in range(len(user_texts)):
+        generated_texts.append(tokenizer.decode(outputs[i][input_lengths[i]:], skip_special_tokens=True))
+    return generated_texts
+
+
+
+
+
+
+
+
+
+
+
 
 
 
