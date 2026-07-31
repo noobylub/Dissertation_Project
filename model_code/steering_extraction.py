@@ -326,23 +326,34 @@ def generateBatchedSteering(
     do_sample=True,
 ):
     """Generate text for a batch of user_texts with optional steering applied to specified layers."""
-    # Format hte messaget
-    messages = [
-        {"role": "system", "content": system_text},
-    ] + [{"role": "user", "content": text} for text in user_texts]
+    # Build one independent chat prompt per user text so generation is truly batched.
+    prompts_for_model = [
+        # List comprehension to create a list of prompts for each user text
+        tokenizer.apply_chat_template(
+            [
+                {"role": "system", "content": system_text},
+                {"role": "user", "content": text},
+            ],
+            tokenize=False,
+            add_generation_prompt=True,
+        )
+        for text in user_texts
+    ]
 
-    # Apply chat template without tokenizing, then tokenize separately
-    text_for_model = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True
-    )
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
 
-    inputs = tokenizer(
-        text_for_model,
-        return_tensors="pt",
-        padding=True
-    ).to(model.device)
+    original_padding_side = tokenizer.padding_side
+    tokenizer.padding_side = "left"
+    try:
+        inputs = tokenizer(
+            prompts_for_model,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+        ).to(model.device)
+    finally:
+        tokenizer.padding_side = original_padding_side
 
     # we want to make sure the steering vector is on the same device 
     # AND that the steering vector is the correct shape and type
@@ -356,7 +367,9 @@ def generateBatchedSteering(
 
     input_ids = inputs["input_ids"]
     attention_mask = inputs["attention_mask"]
-    input_lengths = attention_mask.sum(dim=1).tolist()
+    # For batched generation, new tokens always start after the full padded input width.
+    # Using per-row non-pad lengths leaks part of the prompt when padding_side='left'.
+    prompt_width = input_ids.shape[1]
 
     if steering_vector is None:
         with torch.no_grad():
@@ -384,9 +397,14 @@ def generateBatchedSteering(
 
 
 
-    generated_texts = []
-    for i in range(len(user_texts)):
-        generated_texts.append(tokenizer.decode(outputs[i][input_lengths[i]:], skip_special_tokens=True))
+    generated_token_seqs = [
+        outputs[i][prompt_width:]
+        for i in range(len(user_texts))
+    ]
+    generated_texts = tokenizer.batch_decode(
+        generated_token_seqs,
+        skip_special_tokens=True
+    )
     return generated_texts
 
 

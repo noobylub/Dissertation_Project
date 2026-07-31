@@ -1,8 +1,10 @@
+import csv
 import json
+import uuid
 from datetime import datetime
 from pathlib import Path
 
-from model_code.steering_extraction import generateSteering
+from model_code.steering_extraction import generateSteering, generateBatchedSteering
 
 # Progress bar 
 class _NoOpProgress:
@@ -115,6 +117,57 @@ def generateTextsLayers(
     return generated_texts
 
 
+def generateTextsBatched(
+    user_texts: list[str],
+    system_text: str,
+    model,
+    steering_vector,
+    tokenizer,
+    target_layers=None,
+    steering_strengths=None,
+    max_new_tokens=100,
+    show_progress=True,
+    progress_desc="Generating batched steering"
+):
+    if target_layers is None:
+        target_layers = [20]
+    if steering_strengths is None:
+        steering_strengths = [1.0]
+    if steering_vector is None:
+        steering_strengths = [1.0]  # If no steering vector, set strength to 0
+        steering_vector = None
+
+    generated_texts = []
+    total_steps = len(user_texts) * len(steering_strengths)
+    pbar = _make_progress(total_steps, progress_desc, show_progress)
+    try:
+        for steer_strength in steering_strengths:
+            all_generated_texts = generateBatchedSteering(
+                user_texts=user_texts,
+                system_text=system_text,
+                model=model,
+                steering_vector=steering_vector,
+                tokenizer=tokenizer,
+                target_layers=target_layers,
+                steering_strength=steer_strength,
+                max_new_tokens=max_new_tokens,
+            )
+            all_texts = [
+                {
+                    "user_text": user_text,
+                    "steering_strength": steer_strength,
+                    "generated_text": generated_text
+                } for user_text, generated_text in zip(user_texts, all_generated_texts)
+            ]
+            generated_texts.extend(all_texts)
+            pbar.update(len(all_texts))
+    finally:
+        pbar.close()
+    return generated_texts
+
+
+
+
 def save_generated_outputs(
     data,
     output_path: str | None = None,
@@ -137,3 +190,38 @@ def save_generated_outputs(
         json.dump(data, f, indent=indent, ensure_ascii=ensure_ascii, default=str)
 
     return str(output_file)
+
+
+def save_emotion_responses_csv(
+    emotion_responses: dict,
+    output_path: str,
+    derived_from: str,
+    model_name: str = "LLAMA Indonesian",
+):
+    """Save generated emotion responses as one CSV row per response."""
+    rows = [
+        {
+            "id": str(uuid.uuid4()),
+            "prompt": response.get("user_text", ""),
+            "response": response.get("generated_text", ""),
+            "steering_condition": emotion,
+            "strength": response.get("steering_strength", "NA"),
+            "derived_from": derived_from,
+            "model": model_name,
+        }
+        for emotion, responses in emotion_responses.items()
+        for response in responses
+    ]
+
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "id", "prompt", "response", "steering_condition",
+        "strength", "derived_from", "model",
+    ]
+    with output_file.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return str(output_file), len(rows)

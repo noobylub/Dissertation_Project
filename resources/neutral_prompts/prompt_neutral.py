@@ -11,11 +11,14 @@ prompts_neutral_id = [
 ]
 
 prompt_neutral_id_1 = [
-    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada hari libur. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
-    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada hari kerja. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
-    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat pada akhir pekan. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
-    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
-    "Ceritakan tentang terakhir kali seseorang merasakan emosi yang sangat kuat. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi pada hari libur. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi pada hari kerja. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang mengalami sesuatu yang membuatnya merasakan emosi pada akhir pekan. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang merasakan emosi saat anda bersama teman anda. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang mengalami sesuatu yang membuatnya merasakan emosi ketika bersama keluarga. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang terakhir kali seseorang mengalami sesuatu yang membuatnya merasakan emosi ketika sedang sendirian. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
+    "Ceritakan tentang pengalaman terakhir yang membuat seseorang merasakan emosi. Ceritakan secara rinci apa yang terjadi dan bagaimana perasaannya.",
+    "Ceritakan tentang terakhir kali seseorang mengalami sesuatu yang tidak terduga dan membuatnya merasakan emosi. Pastikan untuk mengasih banyak detail tentang emosi yang dirasakan.",
     # best one out of the four
     # "Jelaskan bagaimana seseorang bereaksi terhadap suatu berita.",
     # "Ceritakanlah apa saja yang anda lakukan hari ini ?",
