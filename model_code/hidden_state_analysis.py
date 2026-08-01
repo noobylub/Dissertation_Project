@@ -79,6 +79,35 @@ def mantel_test(matrix1, matrix2, num_permutations=1000, seed=42):
     p_value = count / num_permutations
     return correlation, p_value
 
+def cross_validation_split(data, k=8, seed=42):
+    """
+    Split data into k folds for cross-validation.
+
+    Parameters:
+    - data: List or array of data points.
+    - k: Number of folds.
+    - seed: Random seed for reproducibility.
+
+    Returns:
+    - folds: List of k tuples, each containing (train_data, val_data).
+    """
+    random.seed(seed)
+    data = list(data)  # Ensure it's a list
+    random.shuffle(data)
+    
+    fold_size, remainder = divmod(len(data), k)
+    folds = []
+
+    start = 0
+    for i in range(k):
+        end = start + fold_size + (1 if i < remainder else 0)
+        val_data = data[start:end]
+        train_data = data[:start] + data[end:]
+        folds.append((train_data, val_data))
+        start = end
+    
+    return folds
+
 
 # Simple MLP for probing task
 class LogisticRegressionProbe(nn.Module):
@@ -98,7 +127,8 @@ class LogisticRegressionProbe(nn.Module):
         self.everything = nn.Sequential(nn.Linear(input_dim, output_dim))
     def forward(self, X):
         return self.everything(X)
-    
+
+  
 
 # Load data into DataLoader
 # A possible problem is that we shuffle incorrect vectors, so some emotion not listed might be 

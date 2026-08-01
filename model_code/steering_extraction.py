@@ -51,6 +51,35 @@ def _extractAllLayer(user_text: str, model, tokenizer):
 
     return torch.stack(all_layer_means)
 
+def statistics_cosine_similarity(emotion_sets: dict):
+    """
+    Calculate contrastive steering vectors from lists of existing vectors.
+    """
+    if not isinstance(emotion_sets, dict) or len(emotion_sets) < 2:
+        raise ValueError("emotion_sets must contain at least 2 emotions.")
+
+    mean_vectors = {}
+    for emotion, vectors in emotion_sets.items():
+        if not vectors:
+            raise ValueError(f"Emotion '{emotion}' has no vectors.")
+        mean_vectors[emotion] = torch.stack(
+            [torch.as_tensor(vector) for vector in vectors], dim=0
+        ).mean(dim=0)
+
+    emotion_vectors = {}
+    for target in mean_vectors:
+        # Take the mean of all other emotion vectors to create a contrastive vector.
+        contrastive = torch.stack(
+            [mean_vectors[e] for e in mean_vectors if e != target], dim=0
+        ).mean(dim=0)   # [layers, hidden_size]
+        emotion_vectors[target] = mean_vectors[target] - contrastive
+    
+    return emotion_vectors 
+ 
+    
+    
+    
+
 # Extract based on two dataset 
 def retrieve_steering_vector_from_datasets(model, tokenizer, dataset_1:list, dataset_2:list, name_folder: str, layer_id=None):
     """

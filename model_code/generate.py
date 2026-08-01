@@ -127,7 +127,8 @@ def generateTextsBatched(
     steering_strengths=None,
     max_new_tokens=100,
     show_progress=True,
-    progress_desc="Generating batched steering"
+    progress_desc="Generating batched steering",
+    do_sample=True
 ):
     if target_layers is None:
         target_layers = [20]
@@ -151,6 +152,7 @@ def generateTextsBatched(
                 target_layers=target_layers,
                 steering_strength=steer_strength,
                 max_new_tokens=max_new_tokens,
+                do_sample=do_sample
             )
             all_texts = [
                 {
