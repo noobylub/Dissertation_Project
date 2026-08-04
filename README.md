@@ -143,9 +143,28 @@ The project follows this general pipeline:
 
 ### 1. Clone the Repository
 
+This repository stores PyTorch vector files (`*.pt`) using Git LFS. Install Git LFS before cloning, then initialize it once on your machine:
+
 ```bash
+git lfs install
 git clone https://github.com/noobylub/Dissertation_Project.git
 cd Dissertation_Project
+```
+
+After setup, use the normal Git workflow. Git LFS automatically uploads and downloads tracked `.pt` files:
+
+```bash
+git pull origin master
+git add .
+git commit -m "Describe your changes"
+git push origin master
+```
+
+To pull repository changes without immediately downloading the large vector files:
+
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git pull origin master
+git lfs pull  # Download the vector files later
 ```
 
 ### 2. Create a Virtual Environment

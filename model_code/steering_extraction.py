@@ -51,6 +51,8 @@ def _extractAllLayer(user_text: str, model, tokenizer):
 
     return torch.stack(all_layer_means)
 
+
+
 def statistics_cosine_similarity(emotion_sets: dict):
     """
     Calculate contrastive steering vectors from lists of existing vectors.
@@ -79,43 +81,6 @@ def statistics_cosine_similarity(emotion_sets: dict):
     
     
     
-
-# Extract based on two dataset 
-def retrieve_steering_vector_from_datasets(model, tokenizer, dataset_1:list, dataset_2:list, name_folder: str, layer_id=None):
-    """
-    Retrieves a steering vector for a given emotion by passing the emotion as inference
-    Then receiving the hidden state and subtracting the mean of the other emotion hidden states to get a contrastive vector
-    """
-
-
-
-    hidden_layers = model.config.num_hidden_layers
-    hidden_size = model.config.hidden_size
-
-    if layer_id is None:
-        layer_id = [21]
-    if isinstance(layer_id, int):
-        layer_id = [layer_id]
-    if not layer_id:
-        raise ValueError("layer_id must contain at least one layer index.")
-    if any((lid < 0 or lid >= hidden_layers) for lid in layer_id):
-        raise ValueError(f"layer_id values must be in [0, {hidden_layers - 1}].")
-
-    vector_1 = torch.zeros(hidden_layers, hidden_size)
-    vector_2 = torch.zeros(hidden_layers, hidden_size)
-
-    for prompt in dataset_1:
-        vector_1 += _extractAllLayer(prompt, model, tokenizer)
-    for prompt in dataset_2:
-        vector_2 += _extractAllLayer(prompt, model, tokenizer)
-    vector_1 = vector_1 / len(dataset_1)
-    vector_2 = vector_2 / len(dataset_2)
-    contrastive_1 = vector_1 - vector_2
-    
-    save_dir = f"resources/saved_vectors/{name_folder}"
-    os.makedirs(save_dir, exist_ok=True)
-    torch.save(contrastive_1, os.path.join(save_dir, "steering_vectors.pt"))
-    return contrastive_1
 
 
 
@@ -155,7 +120,7 @@ def retrieve_steering_vector(
     steering_vectors = {}
 
 
-    # Extracting total vectors for each emotion
+    # Extracting total vectors for each emotion amd doing the calculation 
     for emotion, prompts in emotion_sets.items():
         if not prompts:
             raise ValueError(f"Emotion '{emotion}' has no prompts.")
@@ -466,3 +431,46 @@ def norm_vectors(vectors):
     for i, vector in enumerate(vectors):
         normed_vectors[i] = vector / torch.norm(vector)
     return normed_vectors
+
+
+
+
+
+
+
+# # Extract based on two dataset 
+# def retrieve_steering_vector_from_datasets(model, tokenizer, dataset_1:list, dataset_2:list, name_folder: str, layer_id=None):
+#     """
+#     Retrieves a steering vector for a given emotion by passing the emotion as inference
+#     Then receiving the hidden state and subtracting the mean of the other emotion hidden states to get a contrastive vector
+#     """
+
+
+
+#     hidden_layers = model.config.num_hidden_layers
+#     hidden_size = model.config.hidden_size
+
+#     if layer_id is None:
+#         layer_id = [21]
+#     if isinstance(layer_id, int):
+#         layer_id = [layer_id]
+#     if not layer_id:
+#         raise ValueError("layer_id must contain at least one layer index.")
+#     if any((lid < 0 or lid >= hidden_layers) for lid in layer_id):
+#         raise ValueError(f"layer_id values must be in [0, {hidden_layers - 1}].")
+
+#     vector_1 = torch.zeros(hidden_layers, hidden_size)
+#     vector_2 = torch.zeros(hidden_layers, hidden_size)
+
+#     for prompt in dataset_1:
+#         vector_1 += _extractAllLayer(prompt, model, tokenizer)
+#     for prompt in dataset_2:
+#         vector_2 += _extractAllLayer(prompt, model, tokenizer)
+#     vector_1 = vector_1 / len(dataset_1)
+#     vector_2 = vector_2 / len(dataset_2)
+#     steering_vector = vector_1 - vector_2
+    
+#     # save_dir = f"resources/saved_vectors/{name_folder}"
+#     # os.makedirs(save_dir, exist_ok=True)
+#     # torch.save(contrastive_1, os.path.join(save_dir, "steering_vectors.pt"))
+#     return steering_vector

@@ -1,5 +1,7 @@
 import random
 
+from sklearn.model_selection import StratifiedKFold, train_test_split
+
 from model_code.generate import _make_progress
 from model_code.steering_extraction import generateSteering
 import torch
@@ -79,34 +81,37 @@ def mantel_test(matrix1, matrix2, num_permutations=1000, seed=42):
     p_value = count / num_permutations
     return correlation, p_value
 
-def cross_validation_split(data, k=8, seed=42):
-    """
-    Split data into k folds for cross-validation.
+# def cross_validation_split(data, k=8, seed=42):
+#     """
+#     Split data into k folds for cross-validation.
 
-    Parameters:
-    - data: List or array of data points.
-    - k: Number of folds.
-    - seed: Random seed for reproducibility.
+#     Parameters:
+#     - data: List or array of data points.
+#     - k: Number of folds.
+#     - seed: Random seed for reproducibility.
 
-    Returns:
-    - folds: List of k tuples, each containing (train_data, val_data).
-    """
-    random.seed(seed)
-    data = list(data)  # Ensure it's a list
-    random.shuffle(data)
+#     Returns:
+#     - folds: List of k tuples, each containing (train_data, val_data).
+#     """
+#     random.seed(seed)
+#     data = list(data)  # Ensure it's a list
+#     random.shuffle(data)
     
-    fold_size, remainder = divmod(len(data), k)
-    folds = []
+#     fold_size, remainder = divmod(len(data), k)
+#     folds = []
 
-    start = 0
-    for i in range(k):
-        end = start + fold_size + (1 if i < remainder else 0)
-        val_data = data[start:end]
-        train_data = data[:start] + data[end:]
-        folds.append((train_data, val_data))
-        start = end
+#     start = 0
+#     for i in range(k):
+        
+        
+
+#         # end = start + fold_size + (1 if i < remainder else 0)
+#         # val_data = data[start:end]
+#         # train_data = data[:start] + data[end:]
+#         # folds.append((train_data, val_data))
+#         # start = end
     
-    return folds
+#     return folds
 
 
 # Simple MLP for probing task
@@ -215,6 +220,95 @@ def create_dataloader(
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 
     return train_loader, val_loader
+
+def create_fold_dataloaders(
+    emotion_dict:dict,
+    emotion:str,
+    seed:int=42,
+    batch_size:int=32,
+    k_folds:int=8,
+    multiclass=False,
+    multiclass_emotions=None,
+):
+    """
+    Create k-fold dataloaders for cross-validation.
+    """
+    # Batch size is basically the total divided by the number of folds
+    # batch_size = max(1, len(emotion_dict[emotion]) // k_folds)
+    if multiclass:
+        # For multiclass, we will create a dataset where each vector is labeled with its emotion index
+        vector_blocks = []
+        label_blocks = []
+        if multiclass_emotions is None:
+            multiclass_emotions = list(emotion_dict.keys())
+
+        # assign emotion to a number and add the entire emotion text vectors 
+        for idx, emo in enumerate(multiclass_emotions):
+            vecs = emotion_dict[emo]
+            vecs_np = np.asarray(vecs)
+            vector_blocks.append(vecs_np)
+            label_blocks.append(np.full(vecs_np.shape[0], idx, dtype=np.int64))
+
+        all_vectors = np.concatenate(vector_blocks, axis=0)
+        all_labels = np.concatenate(label_blocks, axis=0)
+
+        X = torch.tensor(all_vectors, dtype=torch.float32)
+        y = torch.tensor(all_labels, dtype=torch.long)
+
+        dataset = torch.utils.data.TensorDataset(X, y)
+        
+        # Preserve the emotion distribution in every fold.
+        kf = StratifiedKFold(n_splits=k_folds, shuffle=True, random_state=seed)
+        folds = []
+        for train_idx, val_idx in kf.split(X, y.numpy()):
+            train_subset = torch.utils.data.Subset(dataset, train_idx)
+            val_subset = torch.utils.data.Subset(dataset, val_idx)
+            train_loader = torch.utils.data.DataLoader(train_subset, batch_size=batch_size, shuffle=True)
+            val_loader = torch.utils.data.DataLoader(val_subset, batch_size=batch_size, shuffle=False)
+            folds.append((train_loader, val_loader))
+        
+        return folds
+    else:
+        correct_vectors = np.asarray(emotion_dict[emotion])
+
+        incorrect_blocks = []
+        incorrect_emotions = []
+        for other_emotion, vectors in emotion_dict.items():
+            if other_emotion == emotion:
+                continue
+            vectors = np.asarray(vectors)
+            incorrect_blocks.append(vectors)
+            incorrect_emotions.extend([other_emotion] * len(vectors))
+
+        # Basically we use a neat hack to ensure that the incorrect vectors are sampled in a stratified manner across emotions.
+        incorrect_pool = np.concatenate(incorrect_blocks, axis=0)
+        incorrect_vectors, _ = train_test_split(
+            incorrect_pool,
+            train_size=len(correct_vectors),
+            stratify=incorrect_emotions,
+            random_state=seed,
+        )
+        
+        y_correct = torch.ones(len(correct_vectors))
+        y_incorrect = torch.zeros(len(incorrect_vectors))
+        
+        all_vectors = np.concatenate([correct_vectors, incorrect_vectors], axis=0)
+        X = torch.tensor(all_vectors, dtype=torch.float32)
+        y = torch.cat([y_correct, y_incorrect])
+
+        dataset = torch.utils.data.TensorDataset(X, y)
+        
+        # Keep the positive and negative classes balanced in every fold.
+        kf = StratifiedKFold(n_splits=k_folds, shuffle=True, random_state=seed)
+        folds = []
+        for train_idx, val_idx in kf.split(X, y.numpy()):
+            train_subset = torch.utils.data.Subset(dataset, train_idx)
+            val_subset = torch.utils.data.Subset(dataset, val_idx)
+            train_loader = torch.utils.data.DataLoader(train_subset, batch_size=batch_size, shuffle=True)
+            val_loader = torch.utils.data.DataLoader(val_subset, batch_size=batch_size, shuffle=False)
+            folds.append((train_loader, val_loader))
+        
+        return folds
 
 
 
