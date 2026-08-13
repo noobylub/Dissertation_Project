@@ -1,47 +1,89 @@
 # Cross-Lingual Emotion Steering in Large Language Models
 
-This repository contains the code, notebooks, prompts, and analysis resources for a dissertation project on **cross-lingual emotion steering in Large Language Models (LLMs)**.
+This repository contains the code, notebooks, datasets, prompts, saved activation vectors, and analysis used for a dissertation project on **cross-lingual emotion representation and activation steering in Large Language Models (LLMs)**.
 
-The project investigates whether emotion representations inside a multilingual LLM are shared across languages, and whether activation steering can shift generated responses toward specific emotions in Indonesian and English.
+The project investigates two related questions:
+
+1. **How are emotions represented internally in English and Indonesian?**
+2. **Can emotion-related activation directions extracted in one language be used to influence model outputs, and do English- and Indonesian-derived directions behave similarly?**
+
+The experiments focus on six emotion categories:
+
+- Anger
+- Happiness
+- Sadness
+- Fear
+- Love
+- Neutral
+
+---
 
 ## Project Overview
 
-Large Language Models can produce emotionally expressive text, but it is still unclear how emotions are represented internally across different languages and cultures. This project explores that question by extracting hidden-state emotion vectors from an LLM and using them to steer model responses.
+Large Language Models can generate emotionally expressive language, but this does not necessarily mean that emotions are represented in the same way across languages.
 
-The main focus is on six emotion categories:
+This project studies English and Indonesian emotion representations using two complementary approaches:
 
-* Anger
-* Happiness
-* Sadness
-* Fear
-* Love
-* Neutral
+### 1. Internal representation analysis
 
-The project uses Indonesian and English emotional text data to extract internal emotion representations, compare them across languages, and test whether steering vectors can influence generated outputs.
+Hidden states are extracted from emotional text and analysed using:
 
-## Research Motivation
+- binary linear probes;
+- multiclass probes;
+- cosine similarity;
+- cross-lingual probe transfer;
+- similarity-matrix comparison; and
+- layer-wise representation analysis.
 
-Most LLM interpretability work focuses heavily on English. However, emotional meaning is not always expressed in the same way across languages. For example, anger, sadness, love, or fear may appear differently in Indonesian compared with English, both linguistically and culturally.
+The aim is to test whether emotion information is linearly recoverable from hidden states and whether the organisation of emotion representations is similar across English and Indonesian.
 
-This project asks:
+### 2. Activation steering
 
-> How are emotional representations structured across languages within a multilingual LLM, and to what extent do these representations reflect language-specific emotional concepts?
+For each emotion, a contrastive steering direction is constructed from hidden states and injected into selected transformer layers during generation.
 
-More specifically, the project explores:
+A steering direction for emotion `e` is computed as:
 
-1. Whether emotion vectors extracted from English and Indonesian hidden states show similar internal structure.
-2. Whether steering with an emotion vector changes the emotional tone of the model response.
-3. Whether English-derived and Indonesian-derived emotion vectors behave similarly when applied during generation.
+```text
+mean hidden state for emotion e
+-
+mean hidden state across the other emotion categories
+```
 
-## What This Repository Contains
+For example:
+
+```text
+anger steering vector
+=
+mean(anger hidden states)
+-
+mean(non-anger emotion hidden states)
+```
+
+The resulting directions are then used to test whether model responses can be shifted toward a target emotion, and whether vectors derived from English and Indonesian data behave differently.
+
+---
+
+## Research Questions
+
+The repository supports the following dissertation questions:
+
+1. **How are emotions represented internally in each language?**
+2. **Do emotion vectors extracted natively from English and Indonesian hidden states align and share similar structure?**
+3. **Can vectorised emotion representations be used to steer outputs across languages?**
+4. **Do vectorised emotion representations derived from different languages yield similar behavioural effects?**
+
+---
+
+## Repository Structure
 
 ```text
 Dissertation_Project/
 │
 ├── images/
-│   └── Figures and visual outputs used for analysis
+│   └── Figures and visual outputs used in the analysis
 │
 ├── model_code/
+│   ├── __init__.py
 │   ├── data_setup.py
 │   ├── generate.py
 │   ├── hidden_state_analysis.py
@@ -64,208 +106,212 @@ Dissertation_Project/
 └── README.md
 ```
 
-## Core Components
+---
 
-### `model_code/data_setup.py`
-
-Loads and prepares the English and Indonesian emotion datasets. The English data is based on emotion-labelled text, while the Indonesian data is loaded from emotion-specific files.
-
-### `model_code/steering_extraction.py`
-
-Contains the main steering logic. It extracts hidden states from the model, averages them by emotion, and creates contrastive steering vectors.
-
-The steering vector is calculated as:
-
-```text
-target emotion vector - mean(other emotion vectors)
-```
-
-For example:
-
-```text
-anger vector = mean(anger hidden states) - mean(non-anger hidden states)
-```
-
-This vector is then added to the model's hidden states during generation.
-
-### `model_code/generate.py`
-
-Provides helper functions for generating text with different steering strengths and target layers.
-
-### `model_code/hidden_state_analysis.py`
-
-Contains analysis tools such as:
-
-* Cosine similarity matrices
-* Mantel tests
-* Linear probing
-* Multiclass probing
-* Hidden-state comparison across emotions and languages
+## Main Files
 
 ### `steer_emotions.ipynb`
 
-Main notebook for loading emotion data, extracting steering vectors, and generating steered model outputs.
+This is the main notebook for:
+
+- loading the English and Indonesian emotion datasets;
+- constructing the emotion dictionaries;
+- extracting hidden states;
+- creating steering vectors;
+- saving activation vectors; and
+- generating responses with activation steering.
+
+If you want to reproduce the steering pipeline, start here.
 
 ### `vectors_analysis.ipynb`
 
-Notebook for analysing the geometry of emotion vectors across languages.
+This notebook contains the main internal-representation analysis.
 
-## Method Summary
+It loads previously extracted activation vectors and is used for:
 
-The project follows this general pipeline:
+- binary probing;
+- multiclass probing;
+- cross-lingual probe evaluation;
+- layer-wise comparisons;
+- cosine-similarity analysis; and
+- statistical analysis of representation results.
 
-1. **Load emotional text data**
+### `model_code/data_setup.py`
 
-   * English emotion examples
-   * Indonesian emotion examples
+Contains functions for loading the English and Indonesian emotion datasets.
 
-2. **Extract hidden states**
+It also contains `modelSetup()`, which loads a Hugging Face causal language model using 8-bit quantisation.
 
-   * Each emotional text is passed through the model.
-   * Hidden states are extracted from transformer layers.
-   * The hidden states are averaged to create an emotion representation.
+### `model_code/steering_extraction.py`
 
-3. **Create steering vectors**
+Contains the main activation-extraction and steering functions, including:
 
-   * For each emotion, the mean vector of that emotion is contrasted against the mean vector of other emotions.
+- hidden-state extraction;
+- contrastive steering-vector construction;
+- vector normalisation;
+- forward-hook based activation steering; and
+- steered text generation.
 
-4. **Apply activation steering**
+### `model_code/generate.py`
 
-   * During generation, the steering vector is added to the model's hidden state at selected transformer layers.
-   * Different steering strengths can be tested.
+Contains utilities for generating responses across:
 
-5. **Evaluate outputs**
+- multiple prompts; and
+- multiple steering strengths.
 
-   * Outputs are compared qualitatively and quantitatively.
-   * Hidden-state similarity, probing accuracy, and generated emotional tone are analysed.
+### `model_code/hidden_state_analysis.py`
 
-## Installation
+Contains utilities used for representation analysis, including:
 
-### 1. Clone the Repository
+- binary probes;
+- multiclass probes;
+- cosine-similarity matrices;
+- Mantel-style matrix comparison; and
+- helper functions for evaluation.
 
-This repository stores PyTorch vector files (`*.pt`) using Git LFS. Install Git LFS before cloning, then initialize it once on your machine:
+---
+
+# Installation
+
+## 1. Clone the repository
 
 ```bash
-git lfs install
 git clone https://github.com/noobylub/Dissertation_Project.git
 cd Dissertation_Project
 ```
 
-After setup, use the normal Git workflow. Git LFS automatically uploads and downloads tracked `.pt` files:
+## 2. Create a virtual environment
+
+macOS/Linux:
 
 ```bash
-git pull origin master
-git add .
-git commit -m "Describe your changes"
-git push origin master
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-To pull repository changes without immediately downloading the large vector files:
+Windows:
 
 ```bash
-GIT_LFS_SKIP_SMUDGE=1 git pull origin master
-git lfs pull  # Download the vector files later
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-### 2. Create a Virtual Environment
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-For Windows:
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. Install Requirements
+## 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Hugging Face Setup
+The repository currently uses packages including PyTorch, Transformers, Accelerate, bitsandbytes, scikit-learn, NumPy, pandas, SciPy, Matplotlib, and Jupyter.
 
-This project uses Hugging Face models. If you are using a gated model such as Llama, you need to request model access first.
+---
 
-### 1. Create an Environment File
+# Hugging Face Setup
 
-```bash
-cp .env .env.local
+The default model loader in `model_code/data_setup.py` uses:
+
+```text
+meta-llama/Meta-Llama-3.1-8B-Instruct
 ```
 
-### 2. Add Your Hugging Face Token
+Because this is a gated Hugging Face model, you must have access to the model and provide a Hugging Face token.
 
-Edit `.env.local` and add your token:
+## 1. Create a `.env` file
+
+Create a file called:
+
+```text
+.env
+```
+
+in the repository root.
+
+Add:
 
 ```text
 HF_TOKEN=your_huggingface_token_here
 ```
 
-You can get a Hugging Face token from:
+Do not commit this file. `.env` is already ignored by the repository's `.gitignore`.
 
-```text
-https://huggingface.co/settings/tokens
-```
+## 2. Load the model
 
-### 3. Load the Token in Python
-
-```python
-from dotenv import load_dotenv
-from huggingface_hub import login
-import os
-
-load_dotenv(".env.local")
-login(token=os.getenv("HF_TOKEN"))
-```
-
-## Basic Usage
-
-### Load Model and Tokenizer
-
-```python
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from dotenv import load_dotenv
-from huggingface_hub import login
-import os
-
-load_dotenv(".env.local")
-login(token=os.getenv("HF_TOKEN"))
-
-model_name = "your-model-name-here"
-
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    torch_dtype=torch.float16,
-    device_map="auto"
-)
-```
-
-Replace `"your-model-name-here"` with the model you want to use.
-
-## Loading Emotion Data
+The simplest way to use the same setup as the project code is:
 
 ```python
 import model_code.data_setup as setup
 
-anger_en, happiness_en, sadness_en, love_en, fear_en, neutral_en = setup.ENEmotionsSetup(
-    examples_take=400,
-    min_chars=20,
-    goemotions_path="resources/en_emotion/goemotions_2.csv"
-)
+model, tokenizer = setup.modelSetup()
+```
 
-anger_id, happiness_id, sadness_id, neutral_id, fear_id, love_id = setup.IDEmotionsSetup(
-    examples_take=400,
-    emotion_dir="resources/id_emotion"
+To use another compatible Hugging Face causal language model:
+
+```python
+model, tokenizer = setup.modelSetup(
+    model_name="your-model-name"
 )
 ```
 
-## Creating Emotion Dictionaries
+`modelSetup()` currently loads the model using 8-bit quantisation through `bitsandbytes` and `device_map="auto"`.
+
+---
+
+# Running the Project
+
+The easiest way to reproduce the project is to run the notebooks rather than treating the repository as a standalone Python package.
+
+Start Jupyter:
+
+```bash
+jupyter notebook
+```
+
+Then use:
+
+```text
+steer_emotions.ipynb
+```
+
+for vector extraction and activation steering, and:
+
+```text
+vectors_analysis.ipynb
+```
+
+for probing and representation analysis.
+
+---
+
+# Example: Loading the Emotion Data
+
+The steering notebook loads up to 400 examples per emotion from each language.
+
+```python
+import model_code.data_setup as setup
+
+anger_en, happiness_en, sadness_en, love_en, fear_en, neutral_en = (
+    setup.ENEmotionsSetup(
+        examples_take=400,
+        min_chars=20,
+        goemotions_path="resources/en_emotion/goemotions_2.csv"
+    )
+)
+
+anger_id, happiness_id, sadness_id, neutral_id, fear_id, love_id = (
+    setup.IDEmotionsSetup(
+        examples_take=400,
+        emotion_dir="resources/id_emotion"
+    )
+)
+```
+
+The return order differs slightly between the English and Indonesian loading functions, so keeping the assignment order shown above is important.
+
+---
+
+# Example: Preparing Steering and Probe Data
+
+The notebook uses the first 200 examples per emotion for steering-vector extraction.
 
 ```python
 indo_emotion = {
@@ -287,51 +333,106 @@ eng_emotion = {
 }
 ```
 
-## Extracting Steering Vectors
+A larger set can be retained separately for probing and hidden-state analysis:
+
+```python
+indo_emotion_probe = {
+    "anger": anger_id[:400],
+    "happiness": happiness_id[:400],
+    "sadness": sadness_id[:400],
+    "neutral": neutral_id[:400],
+    "fear": fear_id[:400],
+    "love": love_id[:400],
+}
+
+eng_emotion_probe = {
+    "anger": anger_en[:400],
+    "happiness": happiness_en[:400],
+    "sadness": sadness_en[:400],
+    "neutral": neutral_en[:400],
+    "fear": fear_en[:400],
+    "love": love_en[:400],
+}
+```
+
+---
+
+# Example: Extracting Steering Vectors
 
 ```python
 from model_code.steering_extraction import retrieve_steering_vector
 
-indo_steering_vectors, indo_emotion_vectors = retrieve_steering_vector(
+indo_steering_vectors, indo_hidden_states = retrieve_steering_vector(
     model=model,
     tokenizer=tokenizer,
     emotion_sets=indo_emotion,
-    name_folder="indonesian_vectors",
+    name_folder="Indonesian Vectors",
     layer_id=[21]
 )
 
-eng_steering_vectors, eng_emotion_vectors = retrieve_steering_vector(
+eng_steering_vectors, eng_hidden_states = retrieve_steering_vector(
     model=model,
     tokenizer=tokenizer,
     emotion_sets=eng_emotion,
-    name_folder="english_vectors",
+    name_folder="English Vectors",
     layer_id=[21]
 )
 ```
 
-The output is a dictionary of steering vectors:
+The function saves steering vectors under:
 
-```python
-indo_steering_vectors["anger"]
-indo_steering_vectors["happiness"]
-indo_steering_vectors["sadness"]
-indo_steering_vectors["fear"]
-indo_steering_vectors["love"]
-indo_steering_vectors["neutral"]
+```text
+resources/saved_vectors/<name_folder>/steering_vectors.pt
 ```
 
-## Generating Text With Steering
+and returns:
+
+```text
+steering_vectors, emotion_vectors
+```
+
+Each steering vector has one direction per transformer layer, so a target emotion can be accessed with:
+
+```python
+eng_steering_vectors["anger"]
+indo_steering_vectors["anger"]
+```
+
+The `layer_id` argument determines which layer activations are retained in the per-example `emotion_vectors` output for later analysis. The contrastive steering tensors themselves contain directions for all transformer layers.
+
+---
+
+# Example: Normalising a Steering Vector
+
+Before steering, the project can normalise each layer direction to unit norm:
+
+```python
+from model_code.steering_extraction import norm_vectors
+
+anger_vector = norm_vectors(
+    indo_steering_vectors["anger"]
+)
+```
+
+This allows steering strength to be applied more consistently across layers.
+
+---
+
+# Example: Generating a Steered Response
 
 ```python
 from model_code.steering_extraction import generateSteering, norm_vectors
 
-prompt = "Teman dekatmu membatalkan janji penting di menit terakhir tanpa menjelaskan alasannya. Bagaimana kamu akan merespons?"
+prompt = (
+    "Teman dekatmu membatalkan janji penting di menit terakhir "
+    "tanpa menjelaskan alasannya. Bagaimana kamu akan merespons?"
+)
 
 system_text = "Jawablah sebagai manusia biasa dalam bahasa Indonesia."
 
-emotion = "anger"
-
-steering_vector = norm_vectors(indo_steering_vectors[emotion])
+steering_vector = norm_vectors(
+    indo_steering_vectors["anger"]
+)
 
 generated_text = generateSteering(
     user_text=prompt,
@@ -348,111 +449,27 @@ generated_text = generateSteering(
 print(generated_text)
 ```
 
-## Example Steering Outputs
+`generateSteering()` uses forward hooks to add the selected steering direction to the hidden state at the chosen transformer layer or layers during generation.
 
-The examples below are illustrative examples of what steered responses may look like. Exact outputs will vary depending on the model, selected layer, steering strength, random seed, temperature, and prompt.
+To generate a baseline without activation steering:
 
----
-
-## Anger Steering
-
-### Indonesian Output
-
-```text
-Terdapat perasaan kebodohan yang menguak dalam hatinya. Keterusan perintah dan isyarat yang terlambat memicu kesal. Menunggu memang membabihi. Ia melihat jam di dinding, mencacai kepentingan waktu yang mampu mengubah hidupnya.
-```
-
-### English Translation
-
-```text
-There was a feeling of foolishness opening up in his heart. The continued delay of instructions and signals triggered irritation. Waiting was truly unbearable. He looked at the clock on the wall, fixating on the importance of time that could change his life.
+```python
+baseline_text = generateSteering(
+    user_text=prompt,
+    system_text=system_text,
+    model=model,
+    tokenizer=tokenizer,
+    steering_vector=None,
+    max_new_tokens=150,
+    temperature=0.7
+)
 ```
 
 ---
 
-## Fear Steering
+# Example: Batch Generation
 
-### Indonesian Output
-
-```text
-Aku merasa terjepit dalam perasaan takut dan harap. Setiap detik berlalu dengan lambat. Aku tahu informasinya akan tiba, tapi aku tak bisa menghilangkan rasa khawatir. Apakah kabar baik akan datang? Apakah aku harus menghadapi rasa kegagalan? Aku mencoba mengambil napas dalam-dalam, tetapi ketakutan menguasai jantungku.
-```
-
-### English Translation
-
-```text
-I feel trapped between fear and hope. Every second passes slowly. I know the information will arrive, but I cannot get rid of the worry. Will good news come? Will I have to face failure? I try to take a deep breath, but fear takes over my heart.
-```
-
----
-
-## Happiness Steering
-
-### Indonesian Output
-
-```text
-Hari ini, matahari terbit di ufuk timur dengan lembutnya. Saya bangun dari tidur, merasa segar dan siap menghadapi hari baru. Aku melihat kejadian di sekitar rumahku, lalu memutuskan untuk berjalan menuju pantai. Senyum muncul di wajahku saat melihat langit biru cerah dan laut yang berwarna biru kehijauan. Aku merasakan damai dalam hati.
-```
-
-### English Translation
-
-```text
-Today, the sun rose gently on the eastern horizon. I woke from sleep feeling refreshed and ready to face a new day. I looked at what was happening around my house, then decided to walk toward the beach. A smile appeared on my face when I saw the bright blue sky and the turquoise sea. I felt peace in my heart.
-```
-
----
-
-## Sadness Steering
-
-### Indonesian Output
-
-```text
-Aku masih ingat hari itu, ketika aku pertama kali melihat dia. Aku jatuh cinta seketika, tapi aku tidak berani mengungkungkan perasaanku. Aku hanya bisa menatap dia dari jauh, haru karena kehilangan. Ternyata, cintaku tidak terbalas. Aku masih ingat hari itu, ketika aku harus meninggalkan dia.
-```
-
-### English Translation
-
-```text
-I still remember that day, when I first saw them. I fell in love instantly, but I did not dare to express my feelings. I could only look at them from afar, moved by a sense of loss. It turned out that my love was not returned. I still remember that day, when I had to leave them.
-```
-
----
-
-## Love Steering
-
-### Indonesian Output
-
-```text
-Saya masih ingat hari itu, ketika saya pertama kali melihat dia. Dia tersenyum manis, mata hijau, dan rambut hitam yang menggantung di bawah, membuat saya jatuh cinta. Namun, dia tidak pernah melihat saya, dan saya hanya bisa menonton dari jauh. Hingga suatu hari, dia melihat saya, dan... (tersenyum sendiri)
-```
-
-### English Translation
-
-```text
-I still remember that day, when I first saw them. They had a sweet smile, green eyes, and black hair hanging down, which made me fall in love. However, they never noticed me, and I could only watch from afar. Until one day, they saw me, and... (smiles to myself).
-```
-
----
-
-## No Steering
-
-### Indonesian Output
-
-```text
-Saya ingat hari itu dengan jelas. Saya berjalan di tepi pantai, matahari terbenam di belakang saya. Angin laut menggema, ombak laut bergoyang. Saya merasakan kebebasan di saat itu. Saya merasa hidup ini indah, penuh warna, dan penuh harapan.
-```
-
-### English Translation
-
-```text
-I remember that day clearly. I was walking along the beach, with the sun setting behind me. The sea breeze echoed, and the waves moved gently. I felt freedom in that moment. I felt that life was beautiful, full of colour, and full of hope.
-```
-
----
-
-## Batch Generation Example
-
-You can also generate multiple responses using a list of prompts and steering strengths.
+Multiple prompts and steering strengths can be evaluated with `generateTextsList()`.
 
 ```python
 from model_code.generate import generateTextsList
@@ -466,7 +483,9 @@ outputs = generateTextsList(
     prompts=prompts,
     system_text="Jawablah sebagai manusia biasa dalam bahasa Indonesia.",
     model=model,
-    steering_vector=norm_vectors(indo_steering_vectors["anger"]),
+    steering_vector=norm_vectors(
+        indo_steering_vectors["anger"]
+    ),
     tokenizer=tokenizer,
     steering_strengths=[0.5, 1.0, 1.5],
     target_layers=[21],
@@ -476,24 +495,230 @@ outputs = generateTextsList(
 outputs
 ```
 
-## Hidden-State Analysis
+The returned object is organised by prompt. Each prompt contains the generated response associated with each steering strength.
 
-The project also analyses whether emotion vectors have similar geometry across languages.
+---
 
-Example analyses include:
+# Example Steering Outputs
 
-* Cosine similarity between emotion vectors
-* Comparing Indonesian and English emotion-vector structures
-* Mantel tests between emotion similarity matrices
-* Linear probes to test whether emotion information is encoded in hidden states
-* Multiclass probes to classify emotion categories from hidden states
+The following are **illustrative outputs from experimental generations**. They are not guaranteed outputs from the exact code snippet above.
 
-Example:
+Generation changes with:
+
+- model;
+- prompt;
+- language;
+- target layer;
+- steering vector;
+- steering strength;
+- temperature; and
+- sampling randomness.
+
+## Anger
+
+### Indonesian
+
+```text
+Terdapat perasaan kebodohan yang menguak dalam hatinya. Keterusan perintah dan isyarat yang terlambat memicu kesal. Menunggu memang membabihi. Ia melihat jam di dinding, mencacai kepentingan waktu yang mampu mengubah hidupnya.
+```
+
+### English translation
+
+```text
+There was a feeling of foolishness opening up in his heart. The continued delay of instructions and signals triggered irritation. Waiting was truly unbearable. He looked at the clock on the wall, fixating on the importance of time that could change his life.
+```
+
+## Fear
+
+### Indonesian
+
+```text
+Aku merasa terjepit dalam perasaan takut dan harap. Setiap detik berlalu dengan lambat. Aku tahu informasinya akan tiba, tapi aku tak bisa menghilangkan rasa khawatir. Apakah kabar baik akan datang? Apakah aku harus menghadapi rasa kegagalan? Aku mencoba mengambil napas dalam-dalam, tetapi ketakutan menguasai jantungku.
+```
+
+### English translation
+
+```text
+I feel trapped between fear and hope. Every second passes slowly. I know the information will arrive, but I cannot get rid of the worry. Will good news come? Will I have to face failure? I try to take a deep breath, but fear takes over my heart.
+```
+
+## Happiness
+
+### Indonesian
+
+```text
+Hari ini, matahari terbit di ufuk timur dengan lembutnya. Saya bangun dari tidur, merasa segar dan siap menghadapi hari baru. Aku melihat kejadian di sekitar rumahku, lalu memutuskan untuk berjalan menuju pantai. Senyum muncul di wajahku saat melihat langit biru cerah dan laut yang berwarna biru kehijauan. Aku merasakan damai dalam hati.
+```
+
+### English translation
+
+```text
+Today, the sun rose gently on the eastern horizon. I woke from sleep feeling refreshed and ready to face a new day. I looked at what was happening around my house, then decided to walk toward the beach. A smile appeared on my face when I saw the bright blue sky and the turquoise sea. I felt peace in my heart.
+```
+
+## Sadness
+
+### Indonesian
+
+```text
+Aku masih ingat hari itu, ketika aku pertama kali melihat dia. Aku jatuh cinta seketika, tapi aku tidak berani mengungkungkan perasaanku. Aku hanya bisa menatap dia dari jauh, haru karena kehilangan. Ternyata, cintaku tidak terbalas. Aku masih ingat hari itu, ketika aku harus meninggalkan dia.
+```
+
+### English translation
+
+```text
+I still remember that day, when I first saw them. I fell in love instantly, but I did not dare to express my feelings. I could only look at them from afar, moved by a sense of loss. It turned out that my love was not returned. I still remember that day, when I had to leave them.
+```
+
+## Love
+
+### Indonesian
+
+```text
+Saya masih ingat hari itu, ketika saya pertama kali melihat dia. Dia tersenyum manis, mata hijau, dan rambut hitam yang menggantung di bawah, membuat saya jatuh cinta. Namun, dia tidak pernah melihat saya, dan saya hanya bisa menonton dari jauh. Hingga suatu hari, dia melihat saya, dan... (tersenyum sendiri)
+```
+
+### English translation
+
+```text
+I still remember that day, when I first saw them. They had a sweet smile, green eyes, and black hair hanging down, which made me fall in love. However, they never noticed me, and I could only watch from afar. Until one day, they saw me, and... (smiles to myself).
+```
+
+## No steering
+
+### Indonesian
+
+```text
+Saya ingat hari itu dengan jelas. Saya berjalan di tepi pantai, matahari terbenam di belakang saya. Angin laut menggema, ombak laut bergoyang. Saya merasakan kebebasan di saat itu. Saya merasa hidup ini indah, penuh warna, dan penuh harapan.
+```
+
+### English translation
+
+```text
+I remember that day clearly. I was walking along the beach, with the sun setting behind me. The sea breeze echoed, and the waves moved gently. I felt freedom in that moment. I felt that life was beautiful, full of colour, and full of hope.
+```
+
+---
+
+# Hidden-State and Cross-Lingual Analysis
+
+The second part of the project analyses whether emotion information can be recovered from internal activations and whether representations generalise across languages.
+
+The main analyses are implemented in:
+
+```text
+vectors_analysis.ipynb
+```
+
+This includes comparisons between English and Indonesian activation sets and, where applicable, between different model conditions.
+
+## Linear Probing
+
+Simple probes are trained on hidden-state representations to test whether emotion information is linearly recoverable.
+
+The project uses:
+
+### Binary probes
+
+For example:
+
+```text
+anger vs non-anger
+```
+
+A separate binary classification problem can be constructed for each emotion.
+
+### Multiclass probes
+
+For example:
+
+```text
+anger
+happiness
+sadness
+love
+fear
+```
+
+These experiments test whether multiple emotion categories can be distinguished simultaneously from hidden-state representations.
+
+## Cross-Lingual Probe Transfer
+
+A probe can be trained on representations from one language and evaluated on representations from another.
+
+Conceptually:
+
+```text
+Train on English activations
+        ↓
+Evaluate on Indonesian activations
+```
+
+and:
+
+```text
+Train on Indonesian activations
+        ↓
+Evaluate on English activations
+```
+
+This provides evidence about how linearly compatible the emotion representations are across languages.
+
+High within-language probe performance does **not** by itself show that English and Indonesian emotion representations are identical. Cross-lingual transfer therefore provides an additional test of alignment.
+
+## Loading Saved Hidden States
+
+The analysis notebook loads saved activation vectors from `resources/saved_vectors/`.
+
+For example:
+
+```python
+import torch
+import numpy as np
+
+english_emotion_vectors = torch.load(
+    "resources/saved_vectors/English Vectors/emotion_vectors.pt",
+    weights_only=False
+)
+
+all_emotions = [
+    "anger",
+    "happiness",
+    "sadness",
+    "love",
+    "fear"
+]
+
+english_arrays = {
+    emotion: np.stack(
+        english_emotion_vectors[emotion],
+        axis=0
+    )
+    for emotion in all_emotions
+}
+```
+
+The exact folder names depend on the `name_folder` used when vectors were extracted.
+
+---
+
+# Cosine Similarity
+
+The repository also includes utilities for comparing emotion directions using cosine similarity.
+
+For steering vectors:
 
 ```python
 from model_code.hidden_state_analysis import build_cosine_matrix
 
-emotions = ["anger", "happiness", "sadness", "fear", "love", "neutral"]
+emotions = [
+    "anger",
+    "happiness",
+    "sadness",
+    "fear",
+    "love",
+    "neutral"
+]
 
 cosine_matrix = build_cosine_matrix(
     vectors_by_emotion=indo_steering_vectors,
@@ -504,93 +729,144 @@ cosine_matrix = build_cosine_matrix(
 cosine_matrix
 ```
 
-## Probing
+This produces a pairwise cosine-similarity matrix for the selected layer.
 
-The repository includes simple probe models for testing whether emotion categories can be predicted from hidden-state vectors.
+A high cosine similarity indicates that two directions point in similar directions in activation space. It does not by itself establish that the two emotions are represented identically.
 
-The probing setup can be used for:
+---
 
-1. Binary emotion classification
-   Example: anger vs non-anger
+# Method Summary
 
-2. Multiclass emotion classification
-   Example: anger vs happiness vs sadness vs fear vs love vs neutral
+The overall workflow is:
 
-This helps test whether emotional information is linearly recoverable from model representations.
-
-## Important Notes
-
-This repository is research code developed for dissertation experimentation. It is not intended to be a polished Python package.
-
-Some results may vary depending on:
-
-* Model choice
-* Layer selection
-* Steering strength
-* Prompt wording
-* Sampling temperature
-* Random seed
-* Whether the steering vector is extracted from English or Indonesian data
-
-Activation steering can influence the emotional tone of generated text, but it does not guarantee perfect emotional control. Some emotions may steer more clearly than others, and some vectors may produce overlapping effects.
-
-## Limitations
-
-This project has several limitations:
-
-1. **Emotion categories are simplified**
-   Emotions such as anger, love, fear, and sadness are treated as discrete labels, even though real emotional expression is more complex.
-
-2. **Steering is not always stable**
-   A steering vector may work well for one prompt but less clearly for another.
-
-3. **Cross-lingual equivalence is difficult to prove**
-   Even if probes perform well across languages, this does not necessarily mean that the model represents emotions identically in each language.
-
-4. **Generated outputs require human interpretation**
-   Emotion in language is subjective, so qualitative analysis and human evaluation are important.
-
-5. **Culture and language are not the same thing**
-   Indonesian-language emotional expression may reflect cultural patterns, but this project does not claim that language alone fully represents culture.
-
-## Future Work
-
-Possible future improvements include:
-
-* Running larger-scale human evaluation
-* Comparing multiple multilingual models
-* Testing more Indonesian and English prompts
-* Evaluating different steering layers
-* Comparing English-derived and Indonesian-derived vectors directly
-* Testing whether emotion steering affects politeness, directness, harmony, or expressivity
-* Improving automatic evaluation of emotional tone
-* Studying whether cultural differences appear in model internal representations
-
-## Example Research Questions for Extension
-
-This repository can support future work on questions such as:
-
-* Do multilingual LLMs represent emotion similarly across languages?
-* Are some emotions more cross-lingually stable than others?
-* Does steering with an English emotion vector produce natural Indonesian emotional expression?
-* Does Indonesian emotion steering produce different social or cultural patterns compared with English steering?
-* Can linear probes detect emotion even when steering vectors do not produce clear behavioural changes?
-
-## Deactivating the Environment
-
-```bash
-deactivate
+```text
+English emotion text              Indonesian emotion text
+        │                                  │
+        ▼                                  ▼
+Extract hidden states              Extract hidden states
+        │                                  │
+        ├──────────► probing ◄─────────────┤
+        │                                  │
+        ├────► cross-lingual transfer ◄────┤
+        │                                  │
+        ▼                                  ▼
+Construct contrastive             Construct contrastive
+emotion directions               emotion directions
+        │                                  │
+        └──────────────┬───────────────────┘
+                       ▼
+              Activation steering
+                       │
+                       ▼
+              Generated responses
+                       │
+                       ▼
+           Human / behavioural analysis
 ```
 
-## Project Status
+---
 
-This project was developed as part of a dissertation investigating cross-lingual emotion representations and activation steering in Large Language Models.
+# Important Experimental Details
 
-## Author
+### Steering-vector data
+
+The steering notebook uses the first 200 examples from each emotion category when constructing steering directions.
+
+### Probe data
+
+A larger set of up to 400 examples per emotion is retained for probing and hidden-state analysis.
+
+### Layer choice
+
+Several examples use:
+
+```python
+layer_id=[21]
+target_layers=[21]
+```
+
+This reflects the experimental configuration used in parts of the dissertation. It should not be interpreted as a claim that layer 21 is universally optimal.
+
+### Vector shape
+
+`generateSteering()` expects a steering tensor containing one vector per model layer:
+
+```text
+[num_hidden_layers, hidden_size]
+```
+
+`target_layers` determines which of those layer directions are actually injected during generation.
+
+---
+
+# Limitations
+
+1. **Emotion categories are simplified**
+
+   Anger, happiness, sadness, fear, love, and neutral are treated as discrete categories, even though emotional experience and emotional language are substantially more complex.
+
+2. **Linear decodability is not the same as causal representation**
+
+   A successful linear probe shows that emotion-related information can be recovered from hidden states. It does not by itself prove that the decoded direction is causally responsible for the model's behaviour.
+
+3. **Cross-lingual probe transfer does not prove identical representations**
+
+   Similar or transferable representations provide evidence of shared structure, but they do not establish that emotions are represented identically in English and Indonesian.
+
+4. **Steering is not perfectly stable**
+
+   Steering effectiveness can vary with prompt, model, emotion, layer, and steering strength.
+
+5. **Emotion evaluation is partly subjective**
+
+   Generated emotional expression requires behavioural or human evaluation rather than relying only on internal vector similarity.
+
+6. **Language and culture are not equivalent**
+
+   Differences between Indonesian- and English-language representations may be culturally relevant, but language alone cannot be treated as a direct measurement of culture.
+
+---
+
+# Reproducibility Notes
+
+Results may vary depending on:
+
+- model checkpoint;
+- activation layer;
+- dataset sample;
+- prompt wording;
+- steering strength;
+- temperature;
+- random seed; and
+- whether the steering direction was extracted from English or Indonesian data.
+
+This repository contains dissertation research code rather than a production-ready Python package.
+
+---
+
+# Future Work
+
+Possible extensions include:
+
+- comparing additional multilingual and language-specialised models;
+- testing more languages;
+- increasing the scale of human evaluation;
+- evaluating steering at additional layers;
+- testing cross-model transfer of emotion directions;
+- comparing alternative steering-vector construction methods;
+- examining whether emotion steering affects social behaviours such as politeness, directness, expressivity, or group harmony;
+- studying how post-training changes emotion representations; and
+- investigating whether language-specific emotional patterns correspond to broader cultural differences.
+
+---
+
+# Author
 
 Muhammad Mushoffa
 
-## Repository
+---
+
+# Repository
 
 ```text
 https://github.com/noobylub/Dissertation_Project
