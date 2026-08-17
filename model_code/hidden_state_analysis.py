@@ -3,7 +3,7 @@ import random
 from sklearn.model_selection import StratifiedKFold, train_test_split
 
 from model_code.generate import _make_progress
-from model_code.steering_extraction import generateSteering
+from model_code.steering_extraction import generateSteering, statistics_cosine_similarity
 import torch
 import torch.nn as nn
 import numpy as np
@@ -34,6 +34,105 @@ def build_cosine_matrix(vectors_by_emotion, emotions,layer_idx):
             ).item()
 
     return pd.DataFrame(matrix, index=emotions, columns=emotions)
+
+
+def bootstrap_steering_cosine_matrices(
+    emotion_sets,
+    num_bootstrap=1000,
+    confidence_level=0.95,
+    paired=True,
+    seed=42,
+    return_samples=False,
+):
+    """
+    Bootstrap layer-wise cosine matrices for one-vs-rest steering vectors.
+
+    Each value in ``emotion_sets`` must contain example-level vectors with
+    shape [examples, layers, hidden_size]. When ``paired`` is True, the same
+    sampled example indices are used for every emotion.
+    """
+    if not isinstance(emotion_sets, dict) or len(emotion_sets) < 2:
+        raise ValueError("emotion_sets must contain at least 2 emotions.")
+    if not isinstance(num_bootstrap, int) or num_bootstrap < 2:
+        raise ValueError("num_bootstrap must be an integer greater than 1.")
+    if not 0 < confidence_level < 1:
+        raise ValueError("confidence_level must be between 0 and 1.")
+
+    emotions = list(emotion_sets)
+    stacked_sets = {}
+    expected_dimensions = None
+
+    for emotion, vectors in emotion_sets.items():
+        tensor = torch.as_tensor(np.asarray(vectors), dtype=torch.float32)
+        if tensor.ndim != 3 or tensor.shape[0] == 0:
+            raise ValueError(
+                f"Emotion '{emotion}' must have shape "
+                "[examples, layers, hidden_size]."
+            )
+        if expected_dimensions is None:
+            expected_dimensions = tensor.shape[1:]
+        elif tensor.shape[1:] != expected_dimensions:
+            raise ValueError("All emotions must have equal layer and hidden dimensions.")
+        stacked_sets[emotion] = tensor
+
+    sample_counts = {emotion: len(vectors) for emotion, vectors in stacked_sets.items()}
+    if paired and len(set(sample_counts.values())) != 1:
+        raise ValueError("Paired bootstrap requires equal example counts for all emotions.")
+
+    def calculate_matrix(steering_vectors):
+        vectors = torch.stack(
+            [steering_vectors[emotion] for emotion in emotions], dim=0
+        )
+        normalized = F.normalize(vectors, p=2, dim=-1)
+        return torch.einsum("elh,flh->lef", normalized, normalized)
+
+    full_sets = {
+        emotion: list(vectors.unbind(dim=0))
+        for emotion, vectors in stacked_sets.items()
+    }
+    observed = calculate_matrix(statistics_cosine_similarity(full_sets))
+
+    generator = torch.Generator().manual_seed(seed)
+    num_layers = expected_dimensions[0]
+    bootstrap_samples = torch.empty(
+        (num_bootstrap, num_layers, len(emotions), len(emotions)),
+        dtype=torch.float32,
+    )
+
+    for bootstrap_idx in range(num_bootstrap):
+        shared_indices = None
+        if paired:
+            sample_count = next(iter(sample_counts.values()))
+            shared_indices = torch.randint(
+                sample_count, (sample_count,), generator=generator
+            )
+
+        sampled_sets = {}
+        for emotion, vectors in stacked_sets.items():
+            indices = shared_indices
+            if indices is None:
+                indices = torch.randint(
+                    len(vectors), (len(vectors),), generator=generator
+                )
+            sampled_sets[emotion] = list(vectors.index_select(0, indices).unbind(dim=0))
+
+        steering_vectors = statistics_cosine_similarity(sampled_sets)
+        bootstrap_samples[bootstrap_idx] = calculate_matrix(steering_vectors)
+
+    alpha = 1 - confidence_level
+    result = {
+        "emotions": emotions,
+        "observed": observed.numpy(),
+        "bootstrap_mean": bootstrap_samples.mean(dim=0).numpy(),
+        "bootstrap_std": bootstrap_samples.std(dim=0, unbiased=True).numpy(),
+        "ci_lower": torch.quantile(bootstrap_samples, alpha / 2, dim=0).numpy(),
+        "ci_upper": torch.quantile(
+            bootstrap_samples, 1 - alpha / 2, dim=0
+        ).numpy(),
+    }
+    if return_samples:
+        result["bootstrap_samples"] = bootstrap_samples.numpy()
+    return result
 
 
 def annotate_heatmap(ax, matrix):
@@ -81,37 +180,7 @@ def mantel_test(matrix1, matrix2, num_permutations=1000, seed=42):
     p_value = count / num_permutations
     return correlation, p_value
 
-# def cross_validation_split(data, k=8, seed=42):
-#     """
-#     Split data into k folds for cross-validation.
 
-#     Parameters:
-#     - data: List or array of data points.
-#     - k: Number of folds.
-#     - seed: Random seed for reproducibility.
-
-#     Returns:
-#     - folds: List of k tuples, each containing (train_data, val_data).
-#     """
-#     random.seed(seed)
-#     data = list(data)  # Ensure it's a list
-#     random.shuffle(data)
-    
-#     fold_size, remainder = divmod(len(data), k)
-#     folds = []
-
-#     start = 0
-#     for i in range(k):
-        
-        
-
-#         # end = start + fold_size + (1 if i < remainder else 0)
-#         # val_data = data[start:end]
-#         # train_data = data[:start] + data[end:]
-#         # folds.append((train_data, val_data))
-#         # start = end
-    
-#     return folds
 
 
 # Simple MLP for probing task
