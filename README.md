@@ -788,18 +788,6 @@ Demszky et al. (2020)
 **Emotion Dataset of Indonesian Public Opinion**  
 Saputra, Pratama, and Chowanda (2022)
 
----
-
-# Citation
-
-If you use this repository or build upon this work, please cite:
-
-```text
-Mushoffa, M. L. (2026).
-Emotions Across Languages in Large Language Models:
-A Cross-Lingual Emotional Representation Study on Large Language Models.
-MSc Dissertation, University of Manchester.
-```
 
 ---
 
